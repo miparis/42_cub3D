@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/30 12:16:16 by miparis           #+#    #+#             */
-/*   Updated: 2025/06/02 20:32:22 by miparis          ###   ########.fr       */
+/*   Created: 2025/06/02 19:01:37 by miparis           #+#    #+#             */
+/*   Updated: 2025/06/02 19:56:29 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "../includes/cub3d.h"
 
-int main(int argc, char **argv)
+int	error_msg(const char *error)
 {
-	t_argument	map_arguments;
-
-	ft_bzero(&map_arguments, sizeof(map_arguments));
-	if (general_parse(argc, argv, &map_arguments))
-		return (1);
-	
-	printf("MIAU MIAU\n");
-	return (0);
+	printf(R "%s\n"NC, error);
+	return (EXIT_FAILURE);
 }

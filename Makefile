@@ -6,7 +6,7 @@
 #    By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/30 12:10:09 by miparis           #+#    #+#              #
-#    Updated: 2025/05/30 12:46:48 by miparis          ###   ########.fr        #
+#    Updated: 2025/06/02 19:15:24 by miparis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,9 @@ LIBFT		= $(LIBFT_DIR)/libft.a
 MLX			= $(MLX_DIR)/libmlx.a
 LIBS		= $(LIBFT) $(MLX) -lm
 
-MY_SOURCES	= src/main.c
+MY_SOURCES	= src/main.c \
+				src/parse/general_parse.c \
+				src/utils.c
 
 OBJS		= ${MY_SOURCES:.c=.o}
 
