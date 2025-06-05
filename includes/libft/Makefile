@@ -6,7 +6,7 @@
 #    By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/11 12:37:16 by miparis           #+#    #+#              #
-#    Updated: 2025/05/30 12:22:48 by miparis          ###   ########.fr        #
+#    Updated: 2025/06/05 17:50:14 by miparis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,9 @@ MY_SOURCES = ft_isdigit.c \
 		 ft_strjoin.c \
 		 ft_strcmp.c \
 		 ft_strnstr.c \
+		 ft_isspace.c \
 		 ft_itoa.c \
+		 ft_strdup.c \
 		 get_next_line.c \
 		 get_next_line_utils.c \
 

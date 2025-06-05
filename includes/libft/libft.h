@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 17:12:43 by miparis           #+#    #+#             */
-/*   Updated: 2024/07/02 11:30:55 by miparis          ###   ########.fr       */
+/*   Updated: 2025/06/05 17:49:58 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,9 @@ char	*ft_strjoin(char const *s1, char const *s2);
 int		ft_strcmp(const char *s1, const char *s2);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char	*ft_itoa(int nbr);
+int		ft_isspace(int c);
+char	*ft_strdup(char *s);
+
 
 /*                     GNL					                                  */
 /*                     Principal Functions                                  */

@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 12:11:37 by miparis           #+#    #+#             */
-/*   Updated: 2025/06/05 11:43:47 by miparis          ###   ########.fr       */
+/*   Updated: 2025/06/05 17:04:44 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,29 @@
 # define NC	"\033[0m"
 
 typedef struct	s_argument			t_argument;
+typedef struct	s_config_flags		t_config_flags;
+typedef struct	s_config				t_config;
+
+struct s_config_flags
+{
+	bool no;
+	bool so;
+	bool we;
+	bool ea;
+	bool floor;
+	bool ceiling;
+};
+
+struct s_config
+{
+	char	*no_path;
+	char	*so_path;
+	char	*we_path;
+	char	*ea_path;
+	int		floor_color;
+	int		ceiling_color;
+	t_config_flags set;
+};
 
 struct s_argument
 {
@@ -46,5 +69,11 @@ int	error_msg(const char *error);
 
 /*								PARSE													*/
 int	general_parse(int argc, char **argv, t_argument map_arguments);
+int	parse_textures(t_argument *arg_map);
+
+/*								PARSE UTILS												*/
+int top_bottom(t_argument *arg_map);
+int lateral_borders(t_argument *arg_map);
+int	open_file(t_argument *arg_map);
 
 #endif

@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/30 12:16:16 by miparis           #+#    #+#             */
-/*   Updated: 2025/06/05 16:17:47 by miparis          ###   ########.fr       */
+/*   Created: 2025/06/05 17:44:14 by miparis           #+#    #+#             */
+/*   Updated: 2025/06/05 17:45:03 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
-
-int main(int argc, char **argv)
+int	ft_isspace(int c)
 {
-	t_argument	map_arguments;
-
-
-	ft_bzero(&map_arguments, sizeof(map_arguments));
-	if (general_parse(argc, argv, map_arguments))
+	if ((c >= 9 && c <= 13) || c == 32)
 		return (1);
-	
-	printf("MIAU MIAU\n");
 	return (0);
 }

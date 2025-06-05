@@ -6,7 +6,7 @@
 #    By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/30 12:10:09 by miparis           #+#    #+#              #
-#    Updated: 2025/06/05 12:16:04 by miparis          ###   ########.fr        #
+#    Updated: 2025/06/05 17:05:08 by miparis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,8 @@ LIBS		= $(LIBFT) $(MLX) -lm
 
 MY_SOURCES	= src/main.c \
 				src/parse/general_parse.c \
+				src/parse/parse_utils.c \
+				src/parse/parse_values.c \
 				src/utils.c
 
 OBJS		= ${MY_SOURCES:.c=.o}
