@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 12:16:16 by miparis           #+#    #+#             */
-/*   Updated: 2025/06/02 20:32:22 by miparis          ###   ########.fr       */
+/*   Updated: 2025/06/05 11:44:44 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int main(int argc, char **argv)
 	t_argument	map_arguments;
 
 	ft_bzero(&map_arguments, sizeof(map_arguments));
-	if (general_parse(argc, argv, &map_arguments))
+	if (general_parse(argc, argv, map_arguments))
 		return (1);
 	
 	printf("MIAU MIAU\n");

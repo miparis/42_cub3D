@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 12:11:37 by miparis           #+#    #+#             */
-/*   Updated: 2025/06/02 20:31:48 by miparis          ###   ########.fr       */
+/*   Updated: 2025/06/05 11:43:47 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,15 @@ struct s_argument
 	char	*file;
 	int		fd;
 	char	**map;
+	char	**copy;
+	size_t	width;
+	size_t	height;
 };
 
 /*								UTILS													*/
 int	error_msg(const char *error);
 
 /*								PARSE													*/
-int	general_parse(int argc, char **argv, t_argument *map_arguments);
+int	general_parse(int argc, char **argv, t_argument map_arguments);
 
 #endif

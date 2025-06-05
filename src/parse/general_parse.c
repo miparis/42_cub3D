@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 19:04:43 by miparis           #+#    #+#             */
-/*   Updated: 2025/06/02 20:35:31 by miparis          ###   ########.fr       */
+/*   Updated: 2025/06/05 12:55:40 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	check_file(char *file, t_argument *arg_map)
 	file_len = ft_strlen(file);
 	ext_len = ft_strlen(ext);
 	arg_map->fd = open(arg_map->file, O_RDONLY);
-	if (arg_map->fd < 0)
+	if (&arg_map->fd < 0)
 		return (error_msg("\nInexisting map file\n"), 1);
 	if (file_len < ext_len)
 	{
@@ -41,7 +41,7 @@ static int	check_file(char *file, t_argument *arg_map)
 	return (0);
 }
 
-int	object_validation(t_argument *arg_map)
+static int	object_validation(t_argument *arg_map)
 {
 	char	*line;
 	int		player_count;
@@ -62,18 +62,173 @@ int	object_validation(t_argument *arg_map)
 	}
 	if (player_count != 1)
 		return (error_msg("\nError: Only one player allowed\n"), 1);
+	close(arg_map->fd);
 	return (0);
 }
 
 
-int	general_parse(int argc, char **argv, t_argument *arg_map)
+static int	calculate_dimension(t_argument *arg_map)
+{
+	char	*line;
+	size_t	line_len;
+
+	arg_map->width = 0;
+	arg_map->height = 0;
+	arg_map->fd = open(arg_map->file, O_RDONLY);
+	if (arg_map->fd < 0)
+		return (error_msg("\nInexisting map file\n"), 1);
+	while ((line = get_next_line(arg_map->fd)))
+	{
+		if (line[0] == '\n') // saltar líneas vacías
+		{
+			free(line);
+			break;
+		}
+		line_len = ft_strlen(line);
+		if (line[line_len - 1] == '\n')
+			line_len--;  // no contar el salto
+		if (line_len > arg_map->width)
+			arg_map->width = line_len;
+		arg_map->height++;
+		free(line);
+	}
+	if (arg_map->width == 0 || arg_map->height == 0)
+		return (error_msg("Error: Empty or invalid map\n"), close(arg_map->fd), 1);
+	return (close(arg_map->fd), 0);
+}
+
+static int	map_memory(t_argument *arg_map)
+{
+	size_t	i;
+
+	i = 0;
+	arg_map->map = ft_calloc((arg_map->height + 1), sizeof(char *));
+	if (!arg_map->map)
+		return (error_msg("\nError: Memory allocation failed\n"), 1);
+	while (i < arg_map->height)
+	{
+		arg_map->map[i] = ft_calloc((arg_map->width + 1), sizeof(char));
+		if (!arg_map->map[i])
+		{
+			while (arg_map->map[i])
+				free(arg_map->map[i]);
+			free(arg_map->map);
+			error_msg("Error: Memory allocation failed\n");
+			return (1);
+		}
+		i++;
+	}
+	arg_map->map[i] = NULL;
+	return (0);
+}
+static int	map_population(t_argument *arg_map)
+{
+	char	*line;
+	size_t	i;
+
+	i = 0;
+	if (map_memory(arg_map))
+		return (1);
+	arg_map->fd = open(arg_map->file, O_RDONLY);
+	if (arg_map->fd < 0)
+		return (error_msg("\nInexisting map file\n"), 1);
+	line = get_next_line(arg_map->fd);
+	while (line != NULL)
+	{
+		ft_strlcpy(arg_map->map[i], line, arg_map->width);
+		free(line);
+		line = get_next_line(arg_map->fd);
+		i++;
+	}
+	free(line);
+	return (0);
+}
+
+/*static int	border_control(t_argument *arg_map)
+{
+	size_t	i;
+	size_t	j;
+	size_t	start;
+	size_t	end;
+
+	i = 0;
+	j = 0;
+	while (i < arg_map->width)
+	{
+		if (arg_map->map[0][i] != '1' && arg_map->map[0][i] != ' ')
+			return (error_msg("\nError: Top border must be closed\n"), 1);
+		if (arg_map->height > 0 && arg_map->map[arg_map->height - 1][i] != '1' && arg_map->map[arg_map->height - 1][i] != ' ')
+					return (error_msg("\nError: Bottom border must be closed\n"), 1);
+		i++;
+	}
+	while (j < arg_map->height)
+	{
+		start = 0;
+		end = ft_strlen(arg_map->map[j]);
+		while (arg_map->map[j][start] == ' ')
+			start++;
+		while (end > start && arg_map->map[j][end - 1] == ' ')
+			end--;
+		if (arg_map->map[j][start] != '1' || arg_map->map[j][end - 1] != '1')
+			return (error_msg("\nError: Map not closed\n"), 1);
+		j++;
+	}
+	return (0);
+}*/
+    
+static int	border_control(t_argument *arg_map)
+{
+	size_t	i;
+	size_t	j;
+	size_t	start;
+	size_t	end;
+
+	if (arg_map->height == 0 || arg_map->width == 0)
+		return (error_msg("\nError: Map dimensions are invalid\n"), 1);
+	i = 0;
+	while (i < arg_map->width)
+	{
+		if (arg_map->map[0][i] != '1' && arg_map->map[0][i] != ' ')
+			return (error_msg("\nError: Top border must be closed\n"), 1);
+		if (arg_map->map[arg_map->height - 1][i] != '1' && arg_map->map[arg_map->height - 1][i] != ' ')
+			return (error_msg("\nError: Bottom border must be closed\n"), 1);
+		i++;
+	}
+	j = 0;
+	while (j < arg_map->height)
+	{
+		start = 0;
+		end = ft_strlen(arg_map->map[j]);
+		while (arg_map->map[j][start] == ' ' && arg_map->map[j][start] != ' ')
+			start++;
+		while (end > start && arg_map->map[j][end - 1] == ' ')
+			end--;
+		if (arg_map->map[j][start] != '1' || arg_map->map[j][end - 1] != '1' || arg_map->map[j][start] != ' ' || arg_map->map[j][end - 1] != ' ' )
+			return (error_msg("\nError: Map not closed\n"), 1);
+		j++;
+	}
+	return (0);
+}
+
+
+int	general_parse(int argc, char **argv, t_argument arg_map)
 {
 	if (argc < 2)
 		return (error_msg("\nMissing argument\n"), 1);
-	arg_map->file = argv[1];
-	if (check_file(argv[1], arg_map))
+	arg_map.file = argv[1];
+	if (check_file(argv[1], &arg_map))
 		return (1);
-	if (object_validation(arg_map))
+	printf(" -> FD = [%d]\n", arg_map.fd);
+	if (object_validation(&arg_map))
+		return (1);
+	if (calculate_dimension(&arg_map))
+		return (1);
+	printf("->Height = [%zu] \n ->Width = [%zu]\n", arg_map.height, arg_map.width);
+	if ((map_population(&arg_map)))
+		return (1);
+	if (!arg_map.map)
+		return(error_msg("\nFailed to load map\n"), 1);
+	if (border_control(&arg_map))
 		return (1);
 	return (0);
 }
