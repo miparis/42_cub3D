@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 19:04:43 by miparis           #+#    #+#             */
-/*   Updated: 2025/06/05 17:55:02 by miparis          ###   ########.fr       */
+/*   Updated: 2025/06/12 12:22:09 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,8 +161,10 @@ int	general_parse(int argc, char **argv, t_argument arg_map)
 	if (check_file(argv[1], &arg_map))
 		return (1);
 	//printf(" -> FD = [%d]\n", arg_map.fd);
-	if (parse_textures(&arg_map))
+	if (parse_config(&arg_map))
 		return (1);
+
+	//SEPARAR LINEAS DEL MAPA DE LA CABECERA
 	if (object_validation(&arg_map))
 		return (1);
 	if (calculate_dimension(&arg_map))
