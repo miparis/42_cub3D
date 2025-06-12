@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:35:59 by miparis           #+#    #+#             */
-/*   Updated: 2025/06/05 18:45:20 by miparis          ###   ########.fr       */
+/*   Updated: 2025/06/12 10:20:09 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,27 @@ static int alloc_set(t_config *config, t_config_flags *flags)
 static int	copy_path(char *line, char **text_path, bool *flag)
 {
 	/* Copiar y chequear ruta valida - Si esta correcta cambia su estado*/
+	//char	*path;
+
 	line += 2;
 	while (*line && ft_isspace(*line))
 		line++;
 	if (ft_strncmp(line, "./", 2))
-		return (error_msg("\nError: Path must begin with ./\n"), 1);
+		return (error_msg("\nError: Paths must begin with ./\n"), 1);
 	//if (the flag passed is not set)
 	//we set the path
 	//we change the flag to true
 	//*line += 3;
+	printf("Line after processing: %s\n", line);
+	printf("Flag: %d\n", *flag);
 	if (*flag)
 		return (error_msg("\nError: Duplicated texture\n"), 1);
+
 	*text_path = ft_strdup(line);
 	if (!*text_path)
 		return (error_msg("\nError: Memory allocation failed\n"), 1);
 	printf("Texture path: %s\n", *text_path);
+
 	if (open(*text_path, O_RDONLY) < 0)
 		return (error_msg("\nError: Invalid texture path A\n"), 1);
 	*flag = true;
@@ -163,36 +169,42 @@ int	parse_textures(t_argument *arg_map)
             free(line); // solo libera y NO hace nada más
         else if (ft_strncmp(line, "NO", 2) == 0)
         {
+			printf(" --> Line = %s\n", line);
             if (copy_path(line, &config.no_path, &flags.no))
                 return (free(line), 1);
             free(line);
         }
         else if (ft_strncmp(line, "SO", 2) == 0)
         {
+			printf(" --> Line = %s\n", line);
             if (copy_path(line, &config.so_path, &flags.so))
                 return (free(line), 1);
             free(line);
         }
         else if (ft_strncmp(line, "WE", 2) == 0)
         {
+			printf(" --> Line = %s\n", line);
             if (copy_path(line, &config.we_path, &flags.we))
                 return (free(line), 1);
             free(line);
         }
         else if (ft_strncmp(line, "EA", 2) == 0)
         {
+			printf(" --> Line = %s\n", line);
             if (copy_path(line, &config.ea_path, &flags.ea))
                 return (free(line), 1);
             free(line);
         }
         else if (ft_strncmp(line, "F", 1) == 0)
         {
+			printf(" --> Line = %s\n", line);
             if (parse_color(line, &config.floor_color, &flags.floor))
                 return (free(line), 1);
             free(line);
         }
         else if (ft_strncmp(line, "C", 1) == 0)
         {
+			printf(" --> Line = %s\n", line);
             if (parse_color(line, &config.ceiling_color, &flags.ceiling))
                 return (free(line), 1);
             free(line);
