@@ -6,7 +6,7 @@
 #    By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/30 12:10:09 by miparis           #+#    #+#              #
-#    Updated: 2025/06/12 11:57:42 by miparis          ###   ########.fr        #
+#    Updated: 2025/06/12 14:26:35 by miparis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ LIBS		= $(LIBFT) $(MLX) -lm
 MY_SOURCES	= src/main.c \
 				src/parse/general_parse.c \
 				src/parse/parse_utils.c \
+				src/parse/parse_maps.c \
 				src/parse/parse_values.c \
 				src/parse/parse_textures.c \
 				src/utils.c

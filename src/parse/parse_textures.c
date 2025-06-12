@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:35:59 by miparis           #+#    #+#             */
-/*   Updated: 2025/06/12 12:10:17 by miparis          ###   ########.fr       */
+/*   Updated: 2025/06/12 15:25:24 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,21 +30,23 @@ static int alloc_set(t_config *config, t_config_flags *flags)
 	flags->ceiling = false;
 	return (0);
 }
-static int parse_colors(char *line, t_config *config, t_config_flags *flags)
+static int parse_colors(char *line, t_config *config, t_config_flags *flags, t_argument *arg_map)
 {
-	if (ft_strncmp(line, "F", 1) == 0)
-	{
-		if (parse_color(line, &config->floor_color, &flags->floor))
-            return (free(line), 1);
-		printf(" --> FLOOR COLOR = %d\n", config->floor_color);
-		free(line);
-    }
-	else if (ft_strncmp(line, "C", 1) == 0)
+	if (ft_strncmp(line, "C", 1) == 0)
     {
+        arg_map->line_count++;
 		if (parse_color(line, &config->ceiling_color, &flags->ceiling))
 			return (free(line), 1);
 		printf(" --> CEILING COLOR = %d\n", config->ceiling_color);
         free(line);
+    }
+	else if (ft_strncmp(line, "F", 1) == 0)
+	{
+        arg_map->line_count++;
+		if (parse_color(line, &config->floor_color, &flags->floor))
+            return (free(line), 1);
+		printf(" --> FLOOR COLOR = %d\n", config->floor_color);
+		free(line);
     }
 	return (0);
 }
@@ -98,16 +100,18 @@ int	parse_config(t_argument *arg_map)
         else if ((ft_strncmp(line, "NO", 2) == 0) || (ft_strncmp(line, "SO", 2) == 0) ||
             ft_strncmp(line, "WE", 2) == 0 || ft_strncmp(line, "EA", 2) == 0 )
         {
+            arg_map->line_count++;
             if (parse_paths(line, &config, &flags))
                 return (1);
         }
 		if (ft_strncmp(line, "C", 1) == 0 || ft_strncmp(line, "F", 1) == 0)
 		{
-            if (parse_colors(line, &config, &flags))
-		 		return (1);
+            if (parse_colors(line, &config, &flags, arg_map))
+                return (1);
         }
     }
     if (!flags.no || !flags.so || !flags.we || !flags.ea || !flags.floor || !flags.ceiling)
         return (error_msg("\nError: Missing texture path or color config\n"), 1);
+    printf(" --> Lines to skip == %d\n", arg_map->line_count);
     return (0);
 }

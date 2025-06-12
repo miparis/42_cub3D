@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 12:11:37 by miparis           #+#    #+#             */
-/*   Updated: 2025/06/12 12:18:54 by miparis          ###   ########.fr       */
+/*   Updated: 2025/06/12 15:32:32 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,11 @@ struct s_config
 struct s_argument
 {
 	char	*file;
-	char	*file;
 	int		fd;
 	char	**map;
-	char	**copy;
+	char	**copy_map;
+	int		map_start;
+	int		line_count;
 	size_t	width;
 	size_t	height;
 };
@@ -78,5 +79,6 @@ int lateral_borders(t_argument *arg_map);
 int	open_file(t_argument *arg_map);
 int	copy_path(char *line, char **text_path, bool *flag);
 int	parse_color(char *line, int *color_dest, bool *flag);
+int	load_file(t_argument *arg_map);
 
 #endif
