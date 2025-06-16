@@ -6,7 +6,7 @@
 #    By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/30 12:10:09 by miparis           #+#    #+#              #
-#    Updated: 2025/06/12 14:26:35 by miparis          ###   ########.fr        #
+#    Updated: 2025/06/16 15:50:53 by miparis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,11 +24,12 @@ MLX			= $(MLX_DIR)/libmlx.a
 LIBS		= $(LIBFT) $(MLX) -lm
 
 MY_SOURCES	= src/main.c \
+				src/parse/memory_set.c \
 				src/parse/general_parse.c \
-				src/parse/parse_utils.c \
 				src/parse/parse_maps.c \
 				src/parse/parse_values.c \
 				src/parse/parse_textures.c \
+				src/parse/clean_memory.c \
 				src/utils.c
 
 OBJS		= ${MY_SOURCES:.c=.o}
@@ -49,7 +50,7 @@ $(MLX):
 	@$(MAKE) -s -C $(MLX_DIR) > /dev/null 2>&1
 
 $(NAME): $(OBJS) $(LIBFT) $(MLX)
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) $(INCLUDES) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) $(INCLUDES) -g -o$(NAME)
 	@echo "✅ Cub3D operating."
 
 # =================== LIMPIEZA =================== #

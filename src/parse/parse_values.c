@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:35:59 by miparis           #+#    #+#             */
-/*   Updated: 2025/06/12 11:50:56 by miparis          ###   ########.fr       */
+/*   Updated: 2025/06/16 16:20:46 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,27 @@
 int	copy_path(char *line, char **text_path, bool *flag)
 {
 	char	*path_start;
+	char	*trimmed;
 
 	path_start = NULL;
-	path_start = ft_strtrim(line, "\n");
-	path_start += 2;
+	trimmed = NULL;
+	trimmed = ft_strtrim(line, "\n");
+	path_start = trimmed + 2;
 	while (path_start && ft_isspace(*path_start))
 		path_start++;
-	if (ft_strncmp(path_start, "./", 2))
-		return (error_msg("\nError: Path must begin with ./\n"), 1);
+	/*if (ft_strncmp(path_start, "./", 2))
+		return (error_msg("\nError: Path must begin with ./\n"), 1);*/
 	if (flag && *flag)
+	{
+		free(trimmed);
 		return (error_msg("\nError: Duplicate texture identifier\n"), 1);
+	}
 	*text_path = ft_strdup(path_start);
+	free(trimmed);
 	if (open(*text_path, O_RDONLY) < 0)
 	{
 		free(*text_path);
+		*text_path = NULL;
 		return (error_msg("\nError: Invalid path for file texture\n"), 1);
 	}
 	*flag = true;
