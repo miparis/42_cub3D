@@ -6,7 +6,7 @@
 #    By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/30 12:10:09 by miparis           #+#    #+#              #
-#    Updated: 2025/06/19 16:03:22 by miparis          ###   ########.fr        #
+#    Updated: 2025/06/19 16:32:01 by miparis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ NAME		= cub3D
 
 CC			= cc
 CFLAGS		= -Wall -Wextra -Werror -g3
+MLXFLAGS	= -lXext -lX11 -lm -lz
 
 INCLUDES	= -Iincludes -Iincludes/libft -Iincludes/minilibx-linux
 LIBFT_DIR	= includes/libft
@@ -54,7 +55,7 @@ $(MLX):
 	@$(MAKE) -s -C $(MLX_DIR) > /dev/null 2>&1
 
 $(NAME): $(OBJS) $(LIBFT) $(MLX)
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) $(INCLUDES) -o$(NAME)
+	@$(CC) $(CFLAGS) $(MLXFLAGS) $(OBJS) $(LIBS) $(INCLUDES) -o$(NAME)
 	@echo "✅ Cub3D operating."
 
 # =================== LIMPIEZA =================== #
