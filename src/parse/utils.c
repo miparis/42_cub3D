@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 10:22:01 by miparis           #+#    #+#             */
-/*   Updated: 2025/06/19 12:35:30 by miparis          ###   ########.fr       */
+/*   Updated: 2025/06/19 14:31:23 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@ int	check_file(char *file, t_argument *arg_map)
 	return (0);
 }
 
-
-/*void print_all(t_argument *arg_map, t_config *config)
+void print_all(t_argument *arg_map, t_config *config)
 {
 	size_t i;
 
@@ -71,4 +70,4 @@ int	check_file(char *file, t_argument *arg_map)
 	}
 	printf("\n");
 	printf("Orientation: %c\n", arg_map->orientation);
-}*/
+}

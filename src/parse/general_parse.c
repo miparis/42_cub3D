@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 19:04:43 by miparis           #+#    #+#             */
-/*   Updated: 2025/06/19 12:26:47 by miparis          ###   ########.fr       */
+/*   Updated: 2025/06/19 14:30:49 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,5 +114,6 @@ int	general_parse(char **argv, t_argument arg_map)
 		return (free_all(&arg_map, &config), 1);
 	if ((top_bottom(&arg_map) || lateral_borders(&arg_map)))
 		return (free_all(&arg_map, &config), 1);
+	print_all(&arg_map, &config);
 	return (close(arg_map.fd), 0);
 }

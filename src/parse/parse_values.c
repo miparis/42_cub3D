@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:35:59 by miparis           #+#    #+#             */
-/*   Updated: 2025/06/19 12:00:27 by miparis          ###   ########.fr       */
+/*   Updated: 2025/06/19 14:22:00 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ static char	*remove_spaces_around_commas(char *str)
 		return (NULL);
 	while (str[i])
 	{
-		if (str[i] == ' ' && (str[i + 1] == ',' || (i > 0 && str[i - 1] == ',')))
+		if (str[i] == ' ' && (str[i + 1] == ','
+				|| (i > 0 && str[i - 1] == ',')))
 			i++;
 		else
 			result[j++] = str[i++];
@@ -79,15 +80,14 @@ int	parse_color(char *line, int *color_dest, bool *flag)
 	if (!clean)
 		return (error_msg("\nError: Memory allocation failed\n"), 1);
 	rgb = ft_split(clean, ',');
+	free(clean);
 	if (!rgb || !rgb[0] || !rgb[1] || !rgb[2] || rgb[3])
-		return (free(clean), free_split(rgb), error_msg("\nError: Invalid RGB format\n"), 1);
+		return (free_split(rgb), error_msg("\nError: Invalid RGB format\n"), 1);
 	r = ft_atoi(rgb[0]);
 	g = ft_atoi(rgb[1]);
 	b = ft_atoi(rgb[2]);
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-		return (free(clean), free_split(rgb), error_msg("\nError: RGB value out of range\n"), 1);
-	*color_dest = (r << 16) | (g << 8) | b; //mueve cada uno de los colores a un formato como 0xRRGGBB,  moviendo los bits de mayor a menor
-	*flag = true;
-	return (free(clean), free_split(rgb), 0);
+		return (free_split(rgb), error_msg("\nError: RGB out of range\n"), 1);
+	*color_dest = (r << 16) | (g << 8) | b;//mueve cada uno de los colores a un formato como 0xRRGGBB,  moviendo los bits de mayor a menor
+	return ((*flag = true), free_split(rgb), 0);
 }
-
