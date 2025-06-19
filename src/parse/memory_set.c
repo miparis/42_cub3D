@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:17:04 by miparis           #+#    #+#             */
-/*   Updated: 2025/06/19 12:21:57 by miparis          ###   ########.fr       */
+/*   Updated: 2025/06/19 16:18:54 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	load_arg(t_argument *arg_map, char **argv)
 	return (0);
 }
 
-int	alloc_set(t_config *config, t_config_flags *flags)
+int	alloc_set(t_config *config, t_config_flags *flags, t_argument *arg)
 {
 	ft_bzero(config, sizeof(t_config));
 	ft_bzero(flags, sizeof(t_config_flags));
@@ -45,6 +45,7 @@ int	alloc_set(t_config *config, t_config_flags *flags)
 	flags->ea = false;
 	flags->floor = false;
 	flags->ceiling = false;
+	arg->config = config;
 	return (0);
 }
 

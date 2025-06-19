@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 12:11:37 by miparis           #+#    #+#             */
-/*   Updated: 2025/06/19 11:48:13 by miparis          ###   ########.fr       */
+/*   Updated: 2025/06/19 16:24:11 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,11 @@
 typedef struct	s_argument			t_argument;
 typedef struct	s_config_flags		t_config_flags;
 typedef struct	s_config			t_config;
-typedef struct  s_game				t_game;
+typedef struct  s_data				t_data;
+typedef struct  s_textures			t_textures;
+typedef struct  s_player			t_player;
+
+# define TILE_SIZE 64
 
 struct s_config_flags
 {
@@ -57,30 +61,48 @@ struct s_config
 
 struct s_argument
 {
-	char	*file;
-	int		fd;
-	char	**map;
-	int		map_start;
-	int		line_count;
-	int		player_count;
-	char	orientation;
-	size_t	width;
-	size_t	height;
-};
-
-struct s_game
-{
+	char		*file;
+	int			fd;
+	char		**map;
+	int			map_start;
+	int			line_count;
+	int			player_count;
 	char		orientation;
+	size_t		width;
+	size_t		height;
+	t_config	*config;
 };
 
+struct s_textures
+{
+	void	*no_texture;
+	void	*so_texture;
+	void	*we_texture;
+	void	*ea_texture;
+};
+
+struct s_player
+{
+	char	orientation;
+	size_t	start_x;
+	size_t	start_y;
+};
+
+struct s_data
+{
+	void		*mlx_ptr;
+	void		*w_ptr;
+	t_player	*player;
+	t_textures	*textures;
+	t_argument	*map;
+	t_config	*config;	
+};
 
 /*								UTILS													*/
 int	error_msg(const char *error);
 
-/*								PARSE													*/
+/*								PARSE 												*/
 int	general_parse(char **argv, t_argument map_arguments);
-
-/*								PARSE UTILS												*/
 int top_bottom(t_argument *arg_map);
 int lateral_borders(t_argument *arg_map);
 int	open_file(t_argument *arg_map);
@@ -91,11 +113,16 @@ int	parse_config(t_argument *arg_map, t_config *config, t_config_flags *flags);
 int	check_file(char *file, t_argument *arg_map);
 int	object_player_validation(char *line, t_argument *arg_map);
 
+/* 							GRAPHICS									*/
+int	set_graphics(t_data *data, t_argument *arg);
+int	calculate_coordanates(t_data *data);
+int	upload_textures(t_data *data, t_textures *textures, t_config *cfig);
+int	init_window(t_data *data, t_argument *arg);
+
 /* 								MEMORY ALLOC & SETTING                 */
-int alloc_set(t_config *config, t_config_flags *flags);
+int	alloc_set(t_config *config, t_config_flags *flags, t_argument *arg);
 int load_arg(t_argument *arg_map, char **argv);
 int	map_memory(t_argument *arg_map);
-
 
 /* 								CLEANING						 */
 void free_all(t_argument *arg_map, t_config *config);

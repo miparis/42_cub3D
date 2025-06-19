@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:34:53 by miparis           #+#    #+#             */
-/*   Updated: 2025/06/19 11:59:20 by miparis          ###   ########.fr       */
+/*   Updated: 2025/06/19 14:46:48 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	error(void)
 {
 	write(1, "\nError: Conversion out of range\n", 33);
-	exit (1); ;
+	exit (1);
 }
 
 int	ft_atoi(const char *str)
