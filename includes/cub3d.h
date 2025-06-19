@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 12:11:37 by miparis           #+#    #+#             */
-/*   Updated: 2025/06/16 15:47:23 by miparis          ###   ########.fr       */
+/*   Updated: 2025/06/19 11:48:13 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 typedef struct	s_argument			t_argument;
 typedef struct	s_config_flags		t_config_flags;
 typedef struct	s_config			t_config;
+typedef struct  s_game				t_game;
 
 struct s_config_flags
 {
@@ -61,15 +62,23 @@ struct s_argument
 	char	**map;
 	int		map_start;
 	int		line_count;
+	int		player_count;
+	char	orientation;
 	size_t	width;
 	size_t	height;
 };
+
+struct s_game
+{
+	char		orientation;
+};
+
 
 /*								UTILS													*/
 int	error_msg(const char *error);
 
 /*								PARSE													*/
-int	general_parse(int argc, char **argv, t_argument map_arguments);
+int	general_parse(char **argv, t_argument map_arguments);
 
 /*								PARSE UTILS												*/
 int top_bottom(t_argument *arg_map);
@@ -79,10 +88,14 @@ int	copy_path(char *line, char **text_path, bool *flag);
 int	parse_color(char *line, int *color_dest, bool *flag);
 int	map_population(t_argument *arg_map);
 int	parse_config(t_argument *arg_map, t_config *config, t_config_flags *flags);
+int	check_file(char *file, t_argument *arg_map);
+int	object_player_validation(char *line, t_argument *arg_map);
 
 /* 								MEMORY ALLOC & SETTING                 */
 int alloc_set(t_config *config, t_config_flags *flags);
 int load_arg(t_argument *arg_map, char **argv);
+int	map_memory(t_argument *arg_map);
+
 
 /* 								CLEANING						 */
 void free_all(t_argument *arg_map, t_config *config);
