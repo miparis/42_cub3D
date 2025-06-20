@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 12:11:37 by miparis           #+#    #+#             */
-/*   Updated: 2025/06/19 16:24:11 by miparis          ###   ########.fr       */
+/*   Updated: 2025/06/20 12:10:47 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ struct s_config
 	char			*ea_path;
 	int				floor_color;
 	int				ceiling_color;
-	t_config_flags	set;
+	t_config_flags	*set;
 };
 
 struct s_argument
@@ -102,7 +102,7 @@ struct s_data
 int	error_msg(const char *error);
 
 /*								PARSE 												*/
-int	general_parse(char **argv, t_argument map_arguments);
+int	general_parse(char **argv, t_argument *map_arguments);
 int top_bottom(t_argument *arg_map);
 int lateral_borders(t_argument *arg_map);
 int	open_file(t_argument *arg_map);
@@ -120,7 +120,7 @@ int	upload_textures(t_data *data, t_textures *textures, t_config *cfig);
 int	init_window(t_data *data, t_argument *arg);
 
 /* 								MEMORY ALLOC & SETTING                 */
-int	alloc_set(t_config *config, t_config_flags *flags, t_argument *arg);
+int	alloc_set(t_config **config, t_config_flags **flags, t_argument *arg);
 int load_arg(t_argument *arg_map, char **argv);
 int	map_memory(t_argument *arg_map);
 
@@ -128,6 +128,7 @@ int	map_memory(t_argument *arg_map);
 void free_all(t_argument *arg_map, t_config *config);
 void free_args(t_argument *arg_map);
 void free_config(t_config *config);
+void	free_flags(t_config_flags *flags);
 
 /*							TEST						*/
 void print_all(t_argument *arg_map, t_config *config);

@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 14:49:38 by miparis           #+#    #+#             */
-/*   Updated: 2025/06/19 16:24:24 by miparis          ###   ########.fr       */
+/*   Updated: 2025/06/20 12:20:25 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 static int	set_player(t_data *data)
 {
 	/*	PLAYER STRUCT */
-	ft_bzero(data->player, sizeof(t_player));
+	data->player = malloc(sizeof(t_player));
 	if (!data->player)
 		return (error_msg("\Error: Failed to allocate player struct\n"), 1);
+	ft_bzero(data->player, sizeof(t_player));
 	/*	PLAYER ORIENTATION */
 	if (calculate_coordanates(data))
 		return (error_msg("\Error: Failed to calculate player coordinates\n"), 1);
@@ -27,12 +28,13 @@ static int	set_player(t_data *data)
 static int	set_textures_struct(t_data *data, t_config *config)
 {
 	/*	TEXTURES STRUCT */
-	ft_bzero(data->textures, sizeof(t_textures));
+	data->textures = malloc(sizeof(t_textures));
 	if (!data->textures)
 		return (error_msg("\nError: Failed to allocate textures struct\n"), 1);
 	/* XMP TO IMAGE FOR EACH ONE*/
+	ft_bzero(data->textures, sizeof(t_textures));
 	if (upload_textures(data, data->textures, config))
-		return (error_msg("\Error: Failed to upload textures\n"), 1);
+		return (1);
 	return (0);
 }
 
@@ -42,7 +44,7 @@ static int	set_data(t_data *data, t_argument *arg, t_config *config)
 	data->map = arg;
 	data->config = config;
 	if (!data->map || !data->config)
-		return (error_msg("\Error: Failed to allocate map or config struct\n"), 1);
+		return (error_msg("\nError: Failed to allocate map or config struct\n"), 1);
 	/*	MXL			*/
 	data->mlx_ptr = mlx_init();
 	if (!data->mlx_ptr)

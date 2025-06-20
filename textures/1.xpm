@@ -1,1 +1,6 @@
-a
+/* XPM */
+static char *red_xpm[] = {
+"1 1 1 1",
+" 	c #FF0000",
+" "
+};

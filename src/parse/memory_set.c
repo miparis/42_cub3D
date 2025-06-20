@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:17:04 by miparis           #+#    #+#             */
-/*   Updated: 2025/06/19 16:18:54 by miparis          ###   ########.fr       */
+/*   Updated: 2025/06/20 12:13:09 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,23 +29,30 @@ int	load_arg(t_argument *arg_map, char **argv)
 	return (0);
 }
 
-int	alloc_set(t_config *config, t_config_flags *flags, t_argument *arg)
+int	alloc_set(t_config **config, t_config_flags **flags, t_argument *arg)
 {
-	ft_bzero(config, sizeof(t_config));
-	ft_bzero(flags, sizeof(t_config_flags));
-	config->no_path = NULL;
-	config->so_path = NULL;
-	config->we_path = NULL;
-	config->ea_path = NULL;
-	config->floor_color = -1;
-	config->ceiling_color = -1;
-	flags->no = false;
-	flags->so = false;
-	flags->we = false;
-	flags->ea = false;
-	flags->floor = false;
-	flags->ceiling = false;
-	arg->config = config;
+	*config = malloc(sizeof(t_config));
+	if (!*config)
+		return (error_msg("\nError: Config struct allocation failed\n"), 1);
+	*flags = malloc(sizeof(t_config_flags));
+	if (!*flags)
+		return (error_msg("\nError: Flags struct allocation failed\n"), 1);
+	ft_bzero(*config, sizeof(t_config));
+	ft_bzero(*flags, sizeof(t_config_flags));
+	(*config)->no_path = NULL;
+	(*config)->so_path = NULL;
+	(*config)->we_path = NULL;
+	(*config)->ea_path = NULL;
+	(*config)->floor_color = -1;
+	(*config)->ceiling_color = -1;
+	(*config)->set = *flags;
+	(*flags)->no = false;
+	(*flags)->so = false;
+	(*flags)->we = false;
+	(*flags)->ea = false;
+	(*flags)->floor = false;
+	(*flags)->ceiling = false;
+	arg->config = *config;
 	return (0);
 }
 
