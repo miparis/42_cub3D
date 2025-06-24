@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 12:11:37 by miparis           #+#    #+#             */
-/*   Updated: 2025/06/20 12:10:47 by miparis          ###   ########.fr       */
+/*   Updated: 2025/06/23 12:06:09 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,13 @@ struct s_textures
 
 struct s_player
 {
-	char	orientation;
-	size_t	start_x;
-	size_t	start_y;
+	double	pos_x;
+	double	pos_y;
+	double	dir_x; //vector direccion a la que esta mirando el jugador 
+	double	dir_y; //vector direccion a la que esta mirando el jugador 
+	double	plane_x; //vector perpendicular a la direccion, determina el campo de vision
+	double	plane_y; //vector perpendicular a la direccion, determina el campo de vision
+
 };
 
 struct s_data
