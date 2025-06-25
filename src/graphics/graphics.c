@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 14:49:38 by miparis           #+#    #+#             */
-/*   Updated: 2025/06/20 12:20:25 by miparis          ###   ########.fr       */
+/*   Updated: 2025/06/25 11:17:30 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,17 @@ static int	set_player(t_data *data)
 	if (!data->player)
 		return (error_msg("\Error: Failed to allocate player struct\n"), 1);
 	ft_bzero(data->player, sizeof(t_player));
-	/*	PLAYER ORIENTATION */
-	if (calculate_coordanates(data))
-		return (error_msg("\Error: Failed to calculate player coordinates\n"), 1);
+	/*	PLAYER SETTING */
+	if (set_position(data))
+		return (1);
+	if (set_orientation(data))
+		return (1);
+	printf("Player position set to: (%.2f, %.2f)\n",
+		data->player->pos_x, data->player->pos_y);
+	printf("Player direction set to: (%.2f, %.2f)\n",
+		data->player->dir_x, data->player->dir_y);
+	printf("Player plane set to: (%.2f, %.2f)\n",
+		data->player->plane_x, data->player->plane_y);
 	return (0);
 }
 

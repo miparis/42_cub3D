@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 12:11:37 by miparis           #+#    #+#             */
-/*   Updated: 2025/06/23 12:06:09 by miparis          ###   ########.fr       */
+/*   Updated: 2025/06/25 10:51:38 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct  s_textures			t_textures;
 typedef struct  s_player			t_player;
 
 # define TILE_SIZE 64
+# define FOV 0.66
 
 struct s_config_flags
 {
@@ -122,6 +123,10 @@ int	set_graphics(t_data *data, t_argument *arg);
 int	calculate_coordanates(t_data *data);
 int	upload_textures(t_data *data, t_textures *textures, t_config *cfig);
 int	init_window(t_data *data, t_argument *arg);
+
+/*				PLAYER										*/
+int	set_position(t_data *data);
+int	set_orientation(t_data *data);
 
 /* 								MEMORY ALLOC & SETTING                 */
 int	alloc_set(t_config **config, t_config_flags **flags, t_argument *arg);

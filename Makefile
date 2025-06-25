@@ -6,7 +6,7 @@
 #    By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/30 12:10:09 by miparis           #+#    #+#              #
-#    Updated: 2025/06/23 11:11:26 by miparis          ###   ########.fr        #
+#    Updated: 2025/06/25 10:20:52 by miparis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,8 @@ MY_SOURCES	= src/main.c \
 				src/parse/clean_memory.c \
 				src/utils.c \
 				src/graphics/graphics.c \
-				src/graphics/window_textures.c 
+				src/graphics/window_textures.c \
+				src/graphics/set_player.c
 
 OBJS		= ${MY_SOURCES:.c=.o}
 
@@ -55,7 +56,7 @@ $(MLX):
 	@$(MAKE) -s -C $(MLX_DIR) > /dev/null 2>&1
 
 $(NAME): $(OBJS) $(LIBFT) $(MLX)
-	@$(CC) $(CFLAGS) $(MLXFLAGS) $(OBJS) $(LIBS) $(INCLUDES) -o$(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) $(MLXFLAGS) $(INCLUDES) -o$(NAME)
 	@echo "✅ Cub3D operating."
 
 # =================== LIMPIEZA =================== #
