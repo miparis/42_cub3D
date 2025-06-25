@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 14:49:38 by miparis           #+#    #+#             */
-/*   Updated: 2025/06/25 11:17:30 by miparis          ###   ########.fr       */
+/*   Updated: 2025/06/25 11:39:01 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	set_player(t_data *data)
 	return (0);
 }
 
-static int	set_textures_struct(t_data *data, t_config *config)
+static int	set_textures(t_data *data, t_config *config)
 {
 	/*	TEXTURES STRUCT */
 	data->textures = malloc(sizeof(t_textures));
@@ -60,7 +60,7 @@ static int	set_data(t_data *data, t_argument *arg, t_config *config)
 	if (init_window(data, arg))
 		return (1);
 	/*TEXTURES STRUCT*/
-	if (set_textures_struct(data, config))
+	if (set_textures(data, config))
 		return (1);
 	/*PLAYERS STRUCT*/
 	if (set_player(data))
@@ -73,6 +73,7 @@ int	set_graphics(t_data *data, t_argument *arg)
 	ft_bzero(data, sizeof(t_data));
 	if (!data)
 		return (error_msg("\nError: Failed to allocate data struct\n"), 1);
-	set_data(data, arg, arg->config);
+	if (set_data(data, arg, arg->config))
+		return (free_data(data), 1);
 	return (0);
 }

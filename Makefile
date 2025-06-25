@@ -6,7 +6,7 @@
 #    By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/30 12:10:09 by miparis           #+#    #+#              #
-#    Updated: 2025/06/25 10:20:52 by miparis          ###   ########.fr        #
+#    Updated: 2025/06/25 11:39:44 by miparis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,8 @@ MY_SOURCES	= src/main.c \
 				src/utils.c \
 				src/graphics/graphics.c \
 				src/graphics/window_textures.c \
-				src/graphics/set_player.c
+				src/graphics/set_player.c \
+				src/graphics/clean_memory.c \
 
 OBJS		= ${MY_SOURCES:.c=.o}
 

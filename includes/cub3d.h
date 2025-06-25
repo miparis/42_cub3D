@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 12:11:37 by miparis           #+#    #+#             */
-/*   Updated: 2025/06/25 10:51:38 by miparis          ###   ########.fr       */
+/*   Updated: 2025/06/25 11:37:20 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,10 +134,11 @@ int load_arg(t_argument *arg_map, char **argv);
 int	map_memory(t_argument *arg_map);
 
 /* 								CLEANING						 */
-void free_all(t_argument *arg_map, t_config *config);
-void free_args(t_argument *arg_map);
-void free_config(t_config *config);
+void	free_all(t_argument *arg_map, t_config *config);
+void	free_args(t_argument *arg_map);
+void	free_config(t_config *config);
 void	free_flags(t_config_flags *flags);
+void	free_data(t_data *data);
 
 /*							TEST						*/
 void print_all(t_argument *arg_map, t_config *config);

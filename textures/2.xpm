@@ -1,6 +1,6 @@
 /* XPM */
 static char *green_xpm[] = {
 "1 1 1 1",
-" 	c #00FF00",
+" 	c rgb(0, 136, 52)",
 " "
 };
