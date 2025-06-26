@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 15:41:18 by miparis           #+#    #+#             */
-/*   Updated: 2025/06/26 13:02:24 by miparis          ###   ########.fr       */
+/*   Updated: 2025/06/26 14:49:48 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ int	init_window(t_data *data, t_argument *arg)
 	size_t	height;
 
 	//el ancho y alto de la ventana son variables, se calculan segun el mapa
-	width = arg->width * TILE_SIZE;
-	height = arg->height * TILE_SIZE;
+	(void)arg;
+	width = SCREEN_WIDTH;
+	height = SCREEN_HEIGHT;
+	printf("\n  WIDTH = [%zu] - HEIGHT = [%zu]\n", width, height);
 	data->w_ptr = mlx_new_window(data->mlx_ptr, width, height, "Cub3D");
 	if (!data->w_ptr)
 		return (error_msg("\nError: Failed to create window\n"), 1);
@@ -31,8 +33,8 @@ int	init_window(t_data *data, t_argument *arg)
 		&data->img->endian);
 	if (!data->img_data)
 		return (error_msg("\nError: Failed to get image data address\n"), 1);
-	data->img->width = width;
-	data->img->height = height;
+	data->img->width = SCREEN_WIDTH;
+	data->img->height = SCREEN_HEIGHT;
 	return (0);
 }
 

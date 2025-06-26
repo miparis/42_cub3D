@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 11:39:03 by miparis           #+#    #+#             */
-/*   Updated: 2025/06/26 13:02:15 by miparis          ###   ########.fr       */
+/*   Updated: 2025/06/26 15:43:35 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ static void put_pixel(t_data *data, int x, int y, int color)
 {
 	char	*dst;
 
-	//printf("\n  WIDTH = [%zu] - HEIGHT = [%zu]\n", data->map->width, data->map->height);
-	if (x < 0 || y < 0 || x >= data->img->width || y >= data->img->height)
+ 	if (x < 0 || y < 0 || x >= data->img->width || y >= data->img->height)
 	{
 		error_msg("\nError: Invalid map dimensions\n");
 		return ;
@@ -41,31 +40,25 @@ static void draw_minimap(t_data *data)
 	int row;
 	int col;
 	int color;
-
-	row = 0;
-	while (row < (int)data->map->height)
+	
+	row = -1;
+	while (++row < (int)data->map->height)
 	{
-		col = 0;
-		while (col < (int)data->map->width)
+		col = -1;
+		while (++col < (int)data->map->width)
 		{
 			if (data->map->map[row][col] == '1')
 				color = data->config->ceiling_color;
 			else
 				color = data->config->floor_color;
-			y = 0;
-			while (y < TILE_SIZE)
+			y = -1;
+			while (++y < data->img->scale_y)
 			{
-				x = 0;
-				while (x < TILE_SIZE)
-				{
-					put_pixel(data, col * TILE_SIZE + x, row * TILE_SIZE + y, color);
-					x++;
-				}
-				y++;
+				x = -1;
+				while (++x < data->img->scale_x)
+					put_pixel(data, (col * data->img->scale_x + x), (row * data->img->scale_x + y) , color);
 			}
-			col++;
 		}
-		row++;
 	}
 }
 
@@ -76,8 +69,8 @@ static void	draw_player(t_data *data)
 	int px;
 	int py;
 
-	px = data->player->pos_x * TILE_SIZE;
-	py = data->player->pos_y * TILE_SIZE;
+	px = data->player->pos_x * (SCREEN_WIDTH / data->map->width);
+	py = data->player->pos_y * (SCREEN_HEIGHT / data->map->height);
 	i = -2;
 	while (i <= 2)
 	{
@@ -95,20 +88,16 @@ static void	draw_direction(t_data *data)
 	int		i;
 	int		px;
 	int		py;
-	double	dx;
-	double	dy;
 	int		x;
 	int		y;
 
-	px = data->player->pos_x * TILE_SIZE;
-	py = data->player->pos_y * TILE_SIZE;
-	dx = data->player->dir_x;
-	dy = data->player->dir_y;
+	px = data->player->pos_x * (SCREEN_WIDTH / data->map->width);
+	py = data->player->pos_y * (SCREEN_HEIGHT / data->map->height);
 	i = 0;
 	while (i < 20)
 	{
-		x = px + dx * i;
-		y = py + dy * i;
+		x = px +  data->player->dir_x * i;
+		y = py + data->player->dir_y * i;
 		put_pixel(data, x, y, 0x00FF00); // verde
 		i++;
 	}

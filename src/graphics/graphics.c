@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 14:49:38 by miparis           #+#    #+#             */
-/*   Updated: 2025/06/26 12:42:59 by miparis          ###   ########.fr       */
+/*   Updated: 2025/06/26 15:41:30 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static	int set_raycaster_struct(t_data *data)
 	if (!data->img)
 		return (error_msg("\Error: Failed to allocate graphics struct\n"), 1);
 	ft_bzero(data->img, sizeof(t_img));
+	data->img->scale_x = SCREEN_WIDTH / data->map->width;
+	data->img->scale_y = SCREEN_HEIGHT / data->map->height;
 	printf("Raycaster initialized.\n");
 	return (0);
 }
