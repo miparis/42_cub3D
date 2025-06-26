@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 11:39:03 by miparis           #+#    #+#             */
-/*   Updated: 2025/06/26 15:43:35 by miparis          ###   ########.fr       */
+/*   Updated: 2025/06/26 17:28:56 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static void	draw_player(t_data *data)
 		j = -2;
 		while (j <= 2)
 		{
-			put_pixel(data, px + j, py + i, 0xFF0000); // rojo
+			put_pixel(data, px + j, py + i, 0xFF0000);// rojo
 			j++;
 		}
 		i++;
@@ -98,16 +98,56 @@ static void	draw_direction(t_data *data)
 	{
 		x = px +  data->player->dir_x * i;
 		y = py + data->player->dir_y * i;
-		put_pixel(data, x, y, 0x00FF00); // verde
+		put_pixel(data, x, y, 0x808080);
 		i++;
 	}
 }
+static void	draw_ray(t_data *data, double dir_x, double dir_y)
+{
+	double		ray_x;
+	double		ray_y;
+	int			map_x;
+	int			map_y;	
+
+	ray_x = data->player->pos_x;
+	ray_y = data->player->pos_y;
+	while (1)
+	{
+		map_x = (int)ray_x;
+		map_y = (int)ray_y;
+		if (data->map->map[map_y][map_x] == '1')
+			break; // Si el rayo toca una pared, salimos del bucle
+		put_pixel(data, ray_x * data->img->scale_x, ray_y * data->img->scale_y, 0x00FF00); // verde
+		ray_x += dir_x * 0.01;
+		ray_y += dir_y * 0.1;
+	}
+}
+
+/*static void draw_fov(t_data *data)
+{
+	int		i;
+	int		camera_x;
+	double	ray_dir_y;
+	double	ray_dir_x;
+
+	i = 0;
+	while (i < SCREEN_WIDTH)
+	{
+		camera_x = (2 * i / (double)SCREEN_WIDTH) - 1; // Normaliza a [-1, 1]
+		ray_dir_x = data->player->dir_x + data->player->plane_x * camera_x;
+		ray_dir_y = data->player->dir_y + data->player->plane_y * camera_x;
+		draw_ray(data, ray_dir_x, ray_dir_y);
+		i++;
+	}
+}*/
 
 int	set_minimap(t_data *data)
 {
 	draw_minimap(data);
 	draw_player(data);
 	draw_direction(data);
+	draw_ray(data, data->player->dir_x , data->player->dir_y);
+	// draw_fov(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->w_ptr, data->img_ptr, 0, 0);
 	return (0);
 }

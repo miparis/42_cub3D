@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 12:11:37 by miparis           #+#    #+#             */
-/*   Updated: 2025/06/26 15:37:43 by miparis          ###   ########.fr       */
+/*   Updated: 2025/06/26 15:46:59 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ struct s_player
 	double	dir_y; //vector direccion a la que esta mirando el jugador 
 	double	plane_x; //vector perpendicular a la direccion, determina el campo de vision
 	double	plane_y; //vector perpendicular a la direccion, determina el campo de vision
-
 };
 
 struct s_img
