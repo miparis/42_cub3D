@@ -6,11 +6,21 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 14:49:38 by miparis           #+#    #+#             */
-/*   Updated: 2025/06/25 11:39:01 by miparis          ###   ########.fr       */
+/*   Updated: 2025/06/26 12:42:59 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+static	int set_raycaster_struct(t_data *data)
+{
+	data->img = malloc(sizeof(t_img));
+	if (!data->img)
+		return (error_msg("\Error: Failed to allocate graphics struct\n"), 1);
+	ft_bzero(data->img, sizeof(t_img));
+	printf("Raycaster initialized.\n");
+	return (0);
+}
 
 static int	set_player(t_data *data)
 {
@@ -57,6 +67,8 @@ static int	set_data(t_data *data, t_argument *arg, t_config *config)
 	data->mlx_ptr = mlx_init();
 	if (!data->mlx_ptr)
 		return ((error_msg("\Error: Failed to allocate MLX struct\n"), 1));
+	if (set_raycaster_struct(data))
+		return (1);
 	if (init_window(data, arg))
 		return (1);
 	/*TEXTURES STRUCT*/
@@ -75,5 +87,6 @@ int	set_graphics(t_data *data, t_argument *arg)
 		return (error_msg("\nError: Failed to allocate data struct\n"), 1);
 	if (set_data(data, arg, arg->config))
 		return (free_data(data), 1);
+	set_minimap(data);
 	return (0);
 }

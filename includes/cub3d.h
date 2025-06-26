@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 12:11:37 by miparis           #+#    #+#             */
-/*   Updated: 2025/06/25 11:37:20 by miparis          ###   ########.fr       */
+/*   Updated: 2025/06/26 12:57:04 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <fcntl.h>
+# include <math.h>
 
 # define G	"\033[1;32m"
 # define Y	"\033[0;33m"
@@ -35,8 +36,11 @@ typedef struct	s_config			t_config;
 typedef struct  s_data				t_data;
 typedef struct  s_textures			t_textures;
 typedef struct  s_player			t_player;
+typedef struct  s_img				t_img;
 
-# define TILE_SIZE 64
+# define TILE_SIZE 24
+# define SCREEN_WIDTH 800
+# define SCREEN_HEIGHT 600
 # define FOV 0.66
 
 struct s_config_flags
@@ -93,14 +97,26 @@ struct s_player
 
 };
 
+struct s_img
+{
+	int		bpp; //bits per pixel
+	int		line_len; //bytes ocupados por cada linea de pixeles en la img
+	int		endian; //endianness de la imagen
+	int		width;
+	int		height;
+};
+
 struct s_data
 {
 	void		*mlx_ptr;
 	void		*w_ptr;
+	void		*img_ptr;
+	void		*img_data; //puntero al inicio del bufer de la imagen
 	t_player	*player;
 	t_textures	*textures;
 	t_argument	*map;
 	t_config	*config;	
+	t_img		*img;
 };
 
 /*								UTILS													*/
@@ -127,6 +143,9 @@ int	init_window(t_data *data, t_argument *arg);
 /*				PLAYER										*/
 int	set_position(t_data *data);
 int	set_orientation(t_data *data);
+
+/*				RAYCASTER										*/
+int	set_minimap(t_data *data);
 
 /* 								MEMORY ALLOC & SETTING                 */
 int	alloc_set(t_config **config, t_config_flags **flags, t_argument *arg);

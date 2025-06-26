@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 12:16:16 by miparis           #+#    #+#             */
-/*   Updated: 2025/06/20 12:19:14 by miparis          ###   ########.fr       */
+/*   Updated: 2025/06/26 11:33:37 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	main(int argc, char **argv)
 	if (set_graphics(&data, &map_arguments))
 		return (error_msg("\nError setting graphics\n"), 1);
 	//free_all(&map_arguments, NULL);
+	mlx_loop(data.mlx_ptr);
 	printf("MIAU MIAU\n");
 	return (0);
 }
