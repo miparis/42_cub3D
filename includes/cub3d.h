@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 12:11:37 by miparis           #+#    #+#             */
-/*   Updated: 2025/06/26 15:46:59 by miparis          ###   ########.fr       */
+/*   Updated: 2025/06/30 15:32:29 by saragar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,4 +163,8 @@ void	free_data(t_data *data);
 /*							TEST						*/
 void print_all(t_argument *arg_map, t_config *config);
 
+
+/*		hola miranda no se donde meter estas funciones perdon		*/
+int	key_control(int keycode, t_data *data);
+int go_exit(t_data *data);
 #endif
