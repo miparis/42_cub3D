@@ -6,7 +6,7 @@
 /*   By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 12:16:16 by miparis           #+#    #+#             */
-/*   Updated: 2025/06/30 19:28:55 by saragar2         ###   ########.fr       */
+/*   Updated: 2025/07/01 18:02:55 by saragar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,15 @@ int	key_control(int keycode, t_data *data)
 	// if (keycode == 65361 || keycode == 65362 || keycode == 65363 || keycode == 65364
 	// || keycode == 65451 || keycode == 65453) //if any arrow or the "+" or "-" are pressed, we enter
 	// //to move_left_right, in image.c
-
+	if (keycode == 65361)
+		data->player->pos_x -= 1;
+	if (keycode == 65362)
+		data->player->pos_y -= 1;
+	if (keycode == 65363)
+		data->player->pos_x += 1;
+	if (keycode == 65364)
+		data->player->pos_y += 1;
+	set_minimap(data);
 	return (0);
 }
 

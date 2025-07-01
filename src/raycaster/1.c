@@ -6,7 +6,7 @@
 /*   By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 11:39:03 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/01 17:30:48 by saragar2         ###   ########.fr       */
+/*   Updated: 2025/07/01 17:55:10 by saragar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void put_pixel(t_data *data, int x, int y, int color)
 // 		j = -2;
 // 		while (j <= 2)
 // 		{
-// 			printf("me mato\n-----------------------------------------");
+// 			printf("DEBUG me mato\n-----------------------------------------");
 // 			put_pixel(data, px + j, py + i, 0xFF0000);// rojo
 // 			j++;
 // 		}
@@ -69,9 +69,9 @@ static void draw_minimap(t_data *data)
 		col = -1;
 		while (++col < (int)data->map->width)
 		{
-			printf("%d --> row, %d --> pos_x\n%d --> col %d --> pos_y\n···································\n", row, (int)data->player->pos_x,  col, (int)data->player->pos_y);
+			// printf("%d --> row, %d --> pos_x\n%d --> col %d --> pos_y\n···································\n", row, (int)data->player->pos_x,  col, (int)data->player->pos_y);
 			if (row == (int)data->player->pos_y && col == (int)data->player->pos_x)
-				color = 0xFF0000; // rojo
+				color = 0xFF0000;
 			else if (data->map->map[row][col] == '1')
 				color = data->config->ceiling_color;
 			else
