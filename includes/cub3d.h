@@ -6,7 +6,7 @@
 /*   By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 12:11:37 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/01 20:18:21 by saragar2         ###   ########.fr       */
+/*   Updated: 2025/07/02 02:10:04 by saragar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ struct s_textures
 struct s_player
 {
 	double	angle; // Angulo de vision del jugador, en radianes
+	double	angle_flag;
 	double	pos_x;
 	double	pos_y;
 	double	dir_x; //vector direccion a la que esta mirando el jugador 

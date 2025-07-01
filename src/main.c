@@ -6,7 +6,7 @@
 /*   By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 12:16:16 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/01 21:02:47 by saragar2         ###   ########.fr       */
+/*   Updated: 2025/07/02 02:30:11 by saragar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ int	key_control(int keycode, t_data *data)
 		data->player->pos_x += 1;
 	if (keycode == 115 && !touch(data, row + 1, col))
 		data->player->pos_y += 1;
+	if (keycode == 65361)
+		data->player->angle_flag -= 0.1;
+	if (keycode == 65363)
+		data->player->angle_flag += 0.1;
 	set_minimap(data);
 	return (0);
 }
@@ -48,6 +52,8 @@ int	main(int argc, char **argv)
 	t_argument	map_arguments;
 	t_data		data;
 
+	//---------------------------donde se inicializa todo???
+	// data.player->angle_flag = 0; //quitar de aqui esto porfa
 	if (argc < 2)
 		return (error_msg("\nMissing argument\n"), 1);
 	ft_bzero(&map_arguments, sizeof(map_arguments));
@@ -64,3 +70,7 @@ int	main(int argc, char **argv)
 	printf("MIAU MIAU\n");
 	return (0);
 }
+
+//----------NOTAS----------
+//de vez en cuando por la cara da deadlysig
+//el unico mapa que se ve correctamente es el HIGH. los demas se ven estirados

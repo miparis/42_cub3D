@@ -6,7 +6,7 @@
 /*   By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 18:53:49 by saragar2          #+#    #+#             */
-/*   Updated: 2025/07/01 21:11:32 by saragar2         ###   ########.fr       */
+/*   Updated: 2025/07/02 02:09:41 by saragar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	draw_rays(t_data *data)
 	int		i;
 
 	// Calcula el ángulo actual del jugador usando su vector de dirección
-	data->player->angle = atan2(data->player->dir_y, data->player->dir_x);
+	data->player->angle = atan2(data->player->dir_y, data->player->dir_x) + data->player->angle_flag;
 
 	// Centro del FOV basado en dirección del jugador
 	double dir_angle = data->player->angle; // en radianes
