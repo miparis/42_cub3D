@@ -6,7 +6,7 @@
 /*   By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 12:11:37 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/01 17:10:47 by saragar2         ###   ########.fr       */
+/*   Updated: 2025/07/01 20:18:21 by saragar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,10 @@ typedef struct  s_img				t_img;
 # define TILE_SIZE 64
 # define SCREEN_WIDTH 1280
 # define SCREEN_HEIGHT 720
-# define FOV 0.66
+# define FOV 60
+# define NUM_RAYS 100 // Cantidad de rayos que se lanzarán
+# define RAY_STEP 0.05 // Qué tan preciso es el paso de cada rayo
+# define M_PI 3.14159265358979323846
 
 struct s_config_flags
 {
@@ -88,6 +91,7 @@ struct s_textures
 
 struct s_player
 {
+	double	angle; // Angulo de vision del jugador, en radianes
 	double	pos_x;
 	double	pos_y;
 	double	dir_x; //vector direccion a la que esta mirando el jugador 
@@ -146,7 +150,10 @@ int	set_position(t_data *data);
 int	set_orientation(t_data *data);
 
 /*				RAYCASTER										*/
+void put_pixel(t_data *data, int x, int y, int color);
 int	set_minimap(t_data *data);
+int	touch(t_data *data, int px, int py);
+void	draw_rays(t_data *data);
 
 /* 								MEMORY ALLOC & SETTING                 */
 int	alloc_set(t_config **config, t_config_flags **flags, t_argument *arg);

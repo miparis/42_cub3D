@@ -6,7 +6,7 @@
 /*   By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 11:39:03 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/01 17:55:10 by saragar2         ###   ########.fr       */
+/*   Updated: 2025/07/01 21:17:22 by saragar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 // Suma total: Obtenés un puntero dst al byte exacto donde está el píxel en (x, y) en la imagen.
 // */
 
-static void put_pixel(t_data *data, int x, int y, int color)
+void put_pixel(t_data *data, int x, int y, int color)
 {
 	char	*dst;
 
@@ -81,7 +81,7 @@ static void draw_minimap(t_data *data)
 			{
 				x = -1;
 				while (++x < data->img->scale_x)
-					put_pixel(data, (col * data->img->scale_x + x), (row * data->img->scale_x + y) , color);
+					put_pixel(data, (col * data->img->scale_x + x), (row * data->img->scale_y + y) , color);
 			}
 		}
 	}
@@ -149,6 +149,7 @@ int	set_minimap(t_data *data)
 {
 	draw_minimap(data);
 // 	draw_player(data);
+	draw_rays(data);
 // 	draw_direction(data);
 // 	draw_ray(data, data->player->dir_x , data->player->dir_y);
 // 	// draw_fov(data);
