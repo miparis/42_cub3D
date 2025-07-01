@@ -6,7 +6,7 @@
 /*   By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 12:11:37 by miparis           #+#    #+#             */
-/*   Updated: 2025/06/30 15:32:29 by saragar2         ###   ########.fr       */
+/*   Updated: 2025/07/01 17:10:47 by saragar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct  s_player			t_player;
 typedef struct  s_img				t_img;
 
 # define TILE_SIZE 64
-# define SCREEN_WIDTH 1680
+# define SCREEN_WIDTH 1280
 # define SCREEN_HEIGHT 720
 # define FOV 0.66
 

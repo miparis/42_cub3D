@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_maps_1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:03:27 by miparis           #+#    #+#             */
-/*   Updated: 2025/06/19 12:41:07 by miparis          ###   ########.fr       */
+/*   Updated: 2025/07/01 16:33:32 by saragar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	skip_header_lines(t_argument *arg_map)
 	return (0);
 }
 
-static void	fill_map_row(t_argument *arg_map, size_t row, char *line)
+static void	 fill_map_row(t_argument *arg_map, size_t row, char *line)
 {
 	size_t	len;
 	size_t	j;
