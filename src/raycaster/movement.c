@@ -6,50 +6,69 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 18:53:49 by saragar2          #+#    #+#             */
-/*   Updated: 2025/07/03 11:26:20 by miparis          ###   ########.fr       */
+/*   Updated: 2025/07/03 16:03:46 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-
 /*	MODIFICAR MOVIMIENTO PARA QUE SEA PROCENTUAL A LA CASILLA QUE ESTA */
-int	key_control(int keycode, t_data *data)
+static int	update_position(t_data *data, double x, double y)
 {
-	int	row;
-	int	col;
+	double	new_x;
+	double	new_y;
 
-	row = (int)data->player->pos_y;
-	col = (int)data->player->pos_x;
-	if (keycode == 65307) //if "ESC" is pressed, the program closes in a clean way
-		go_exit(data);
-	// if (keycode == 65361 || keycode == 65362 || keycode == 65363 || keycode == 65364
-	// || keycode == 65451 || keycode == 65453) //if any arrow or the "+" or "-" are pressed, we enter
-	// //to move_left_right, in image.c
-	if (keycode == 97 && !touch(data, row, col - 1))
-		data->player->pos_x -= 1;
-	if (keycode == 119 && !touch(data, row - 1, col))
-		data->player->pos_y -= 1;
-	if (keycode == 100 && !touch(data, row, col + 1))
-		data->player->pos_x += 1;
-	if (keycode == 115 && !touch(data, row + 1, col))
-		data->player->pos_y += 1;
-	if (keycode == 65361)
-		data->player->angle_flag -= 0.1;
-	if (keycode == 65363)
-		data->player->angle_flag += 0.1;
-	set_minimap(data);
+	new_x = data->player->pos_x + x;
+	new_y = data->player->pos_y + y;
+	
+	if (!touch(data, data->player->pos_y, new_x))
+		data->player->pos_x = new_x;
+	if (!touch(data, new_y, data->player->pos_x))
+		data->player->pos_y = new_y;
 	return (0);
 }
 
 int	touch(t_data *data, int px, int py)
 {
+	// Asegurarse de que px y py estén dentro de los límites del mapa para evitar segfaults
+	if (py < 0 || py >= (int)data->map->height || px < 0 || px >= (int)ft_strlen(data->map->map[py]))
+        return (1);
 	if (data->map->map[px][py] == '1')
-	return (1);
+		return (1);
 	return (0);
 }
-// if (px < 0 || py < 0 || (size_t) px >= data->map->width || (size_t) py >= data->map->height)
-// 	return (1);
+
+int	key_control(int keycode, t_data *data)
+{
+	if (keycode == 65307) //"ESC"
+		go_exit(data);
+	else if (keycode == 119) //W
+	{
+		update_position(data, cos(data->player->angle) * M_SPEED,
+			sin(data->player->angle) * M_SPEED);
+	}
+	else if (keycode == 115) // S
+	{
+		update_position(data, cos(data->player->angle) * -M_SPEED,
+			sin(data->player->angle)* -M_SPEED);
+	}
+	else if (keycode == 100) //D
+	{
+		update_position(data, sin(data->player->angle) * -M_SPEED,
+			cos(data->player->angle) * M_SPEED);
+	}
+	else if (keycode == 97) //A
+	{
+		update_position(data, sin(data->player->angle) * M_SPEED,
+			cos(data->player->angle) * -M_SPEED);
+	}
+	if (keycode == 65361) // Izquierda
+		data->player->angle_flag -= R_SPEED;
+	if (keycode == 65363) // Derecha
+		data->player->angle_flag += R_SPEED;
+	set_minimap(data);
+	return (0);
+}
 
 void	draw_rays(t_data *data)
 {
