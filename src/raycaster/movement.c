@@ -6,13 +6,12 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 18:53:49 by saragar2          #+#    #+#             */
-/*   Updated: 2025/07/03 16:14:47 by miparis          ###   ########.fr       */
+/*   Updated: 2025/07/03 17:33:58 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/*	MODIFICAR MOVIMIENTO PARA QUE SEA PROCENTUAL A LA CASILLA QUE ESTA */
 static int	update_position(t_data *data, double x, double y)
 {
 	double	new_x;
@@ -20,7 +19,6 @@ static int	update_position(t_data *data, double x, double y)
 
 	new_x = data->player->pos_x + x;
 	new_y = data->player->pos_y + y;
-	
 	if (!touch(data, data->player->pos_y, new_x))
 		data->player->pos_x = new_x;
 	if (!touch(data, new_y, data->player->pos_x))
@@ -28,34 +26,19 @@ static int	update_position(t_data *data, double x, double y)
 	return (0);
 }
 
-/*int	touch(t_data *data, int px, int py)
-{
-	// Asegurarse de que px y py estén dentro de los límites del mapa para evitar segfaults
-	if (py < 0 || py >= (int)data->map->height || px < 0 || px >= (int)ft_strlen(data->map->map[py]))
-        return (1);
-	if (data->map->map[px][py] == '1')
-		return (1);
-	return (0);
-}*/
-int touch(t_data *data, int px_map_y, int py_map_x) // Renombré para mayor claridad
+int	touch(t_data *data, int px_map_y, int py_map_x)
 {
     // Asegurarse de que las coordenadas estén dentro de los límites válidos del mapa.
     // px_map_y es la fila (Y) y py_map_x es la columna (X).
-    
     // Primero, verifica que la fila (py_map_y) sea válida antes de intentar obtener su longitud.
-    if (px_map_y < 0 || px_map_y >= (int)data->map->height)
-        return (1); // Fuera de los límites verticales (es una pared)
-
-    // Ahora que la fila es válida, podemos obtener su longitud.
+	if (px_map_y < 0 || px_map_y >= (int)data->map->height)
+		return (1);
     // Comprueba los límites horizontales (py_map_x)
-    if (py_map_x < 0 || py_map_x >= (int)ft_strlen(data->map->map[px_map_y]))
-        return (1); // Fuera de los límites horizontales (es una pared)
-
-    // Acceder al mapa como [fila][columna] -> [px_map_y][py_map_x]
-    if (data->map->map[px_map_y][py_map_x] == '1')
-        return (1); // Es una pared
-    
-    return (0); // No es una pared
+	if (py_map_x < 0 || py_map_x >= (int)ft_strlen(data->map->map[px_map_y]))
+		return (1);
+	if (data->map->map[px_map_y][py_map_x] == '1')
+		return (1); 
+	return (0);
 }
 
 int	key_control(int keycode, t_data *data)
@@ -63,25 +46,17 @@ int	key_control(int keycode, t_data *data)
 	if (keycode == 65307) //"ESC"
 		go_exit(data);
 	else if (keycode == 119) //W
-	{
 		update_position(data, cos(data->player->angle) * M_SPEED,
 			sin(data->player->angle) * M_SPEED);
-	}
 	else if (keycode == 115) // S
-	{
 		update_position(data, cos(data->player->angle) * -M_SPEED,
 			sin(data->player->angle)* -M_SPEED);
-	}
 	else if (keycode == 100) //D
-	{
 		update_position(data, sin(data->player->angle) * -M_SPEED,
 			cos(data->player->angle) * M_SPEED);
-	}
 	else if (keycode == 97) //A
-	{
 		update_position(data, sin(data->player->angle) * M_SPEED,
 			cos(data->player->angle) * -M_SPEED);
-	}
 	if (keycode == 65361) // Izquierda
 		data->player->angle_flag -= R_SPEED;
 	if (keycode == 65363) // Derecha
@@ -134,4 +109,3 @@ void	draw_rays(t_data *data)
 		}
 	}
 }
-

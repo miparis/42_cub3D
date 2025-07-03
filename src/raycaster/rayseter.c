@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 11:39:03 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/03 16:10:45 by miparis          ###   ########.fr       */
+/*   Updated: 2025/07/03 17:36:47 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ static void draw_minimap(t_data *data)
 		col = -1;
 		while (++col < (int)data->map->width)
 		{
-			/*if (row == (int)data->player->pos_y && col == (int)data->player->pos_x)
-				color = 0xFF0000;*/
 			if (data->map->map[row][col] == '1')
 				color = data->config->ceiling_color;
 			else

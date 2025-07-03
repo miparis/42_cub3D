@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 12:11:37 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/03 16:25:55 by miparis          ###   ########.fr       */
+/*   Updated: 2025/07/03 17:08:46 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ struct s_data
 
 /*								UTILS													*/
 int	error_msg(const char *error);
+int go_exit(t_data *data);
 
 /*								PARSE 												*/
 int	general_parse(char **argv, t_argument *map_arguments);
@@ -155,8 +156,9 @@ int	set_orientation(t_data *data);
 /*				RAYCASTER										*/
 void	put_pixel(t_data *data, int x, int y, int color);
 int		set_minimap(t_data *data);
-int	touch(t_data *data, int px, int py);
+int		touch(t_data *data, int px, int py);
 void	draw_rays(t_data *data);
+int		key_control(int keycode, t_data *data);
 
 /* 								MEMORY ALLOC & SETTING                 */
 int	alloc_set(t_config **config, t_config_flags **flags, t_argument *arg);
@@ -172,10 +174,5 @@ void	free_data(t_data *data);
 
 /*							TEST						*/
 void print_all(t_argument *arg_map, t_config *config);
-
-
-/*		hola miranda no se donde meter estas funciones perdon		*/
-int	key_control(int keycode, t_data *data);
-int go_exit(t_data *data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:28:47 by miparis           #+#    #+#             */
-/*   Updated: 2025/06/25 11:49:41 by miparis          ###   ########.fr       */
+/*   Updated: 2025/07/03 17:24:17 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,7 @@ void	free_data(t_data *data)
 	if (!data)
 		return ;
 	if (data->mlx_ptr && data->w_ptr)
-	{
 		mlx_destroy_window(data->mlx_ptr, data->w_ptr);
-		//mlx_destroy_display(data->mlx_ptr);
-	}
 	if (data->player)
 		free_player(data->player);
 	if (data && data->textures)
@@ -53,5 +50,6 @@ void	free_data(t_data *data)
 		free_config(data->config);
 	if (data->map)
 		free_args(data->map);
-	//free(data);
+	if (data->mlx_ptr)
+		mlx_destroy_display(data->mlx_ptr);
 }

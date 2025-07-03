@@ -6,18 +6,11 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 12:16:16 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/03 11:23:10 by miparis          ###   ########.fr       */
+/*   Updated: 2025/07/03 17:21:18 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-int go_exit(t_data *data)
-{
-	free_data(data);
-	exit(0);
-	return (0);
-}
 
 int	main(int argc, char **argv)
 {
@@ -32,7 +25,6 @@ int	main(int argc, char **argv)
 	print_all(&map_arguments, map_arguments.config);
 	if (set_graphics(&data, &map_arguments))
 		return (error_msg("\nError setting graphics\n"), 1);
-	//free_all(&map_arguments, NULL);
 
 	mlx_hook(data.w_ptr, 2, 1L << 0, key_control, &data);
 	mlx_hook(data.w_ptr, 17, 0, go_exit, &data);
@@ -40,7 +32,3 @@ int	main(int argc, char **argv)
 	printf("MIAU MIAU\n");
 	return (0);
 }
-
-//----------NOTAS----------
-//de vez en cuando por la cara da deadlysig
-//el unico mapa que se ve correctamente es el HIGH. los demas se ven estirados
