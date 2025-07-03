@@ -45,8 +45,8 @@ Implementación del algoritmo de raycasting para proyectar la vista 3D del jugad
 
 * **3.1. Lógica y matemática del raycasting:**
     * Calcular la dirección de cada rayo lanzado desde la posición del jugador a través del campo de visión.
-    * Implementar el algoritmo **DDA (Digital Differential Analyzer)** para determinar la intersección de cada rayo con los muros en el mapa. - DONE
-    * Determinar con precisión las coordenadas de intersección del rayo con los muros. - DONE
+    * Implementar el algoritmo **DDA (Digital Differential Analyzer)** para determinar la intersección de cada rayo con los muros en el mapa.
+    * Determinar con precisión las coordenadas de intersección del rayo con los muros.
     * Calcular la distancia perpendicular (fisheye correction) desde el jugador hasta el punto de impacto del rayo con el muro.
     * Calcular la altura de la porción del muro a dibujar en la pantalla en función de la distancia.
 
@@ -58,7 +58,7 @@ Implementación del algoritmo de raycasting para proyectar la vista 3D del jugad
 
 ---
 
-## 🎮 4. Eventos de Movimiento y Teclado
+## 🎮 4. Eventos de Movimiento y Teclado - DONE
 
 Manejo de la interacción del jugador con el entorno.
 
@@ -67,11 +67,11 @@ Manejo de la interacción del jugador con el entorno.
     * Asegurar que el jugador no pueda atravesar los muros.
 
 * **4.2. Rotación de la vista:**
-    * Implementar la rotación del punto de vista del jugador usando las flechas izquierda y derecha del teclado. - DONE
+    * Implementar la rotación del punto de vista del jugador usando las flechas izquierda y derecha del teclado.
 
 * **4.3. Control de la aplicación:**
-    * Manejar el evento de presionar la tecla `ESC` para cerrar la ventana y salir del programa de forma limpia. - DONE
-    * Manejar el evento de clic en el botón de cerrar la ventana (la cruz roja) para salir del programa de forma segura. - DONE
+    * Manejar el evento de presionar la tecla `ESC` para cerrar la ventana y salir del programa de forma limpia.
+    * Manejar el evento de clic en el botón de cerrar la ventana (la cruz roja) para salir del programa de forma segura.
 
 ---
 
