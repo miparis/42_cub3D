@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 14:49:38 by miparis           #+#    #+#             */
-/*   Updated: 2025/06/26 15:41:30 by miparis          ###   ########.fr       */
+/*   Updated: 2025/07/03 11:19:44 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static int	set_data(t_data *data, t_argument *arg, t_config *config)
 		return ((error_msg("\Error: Failed to allocate MLX struct\n"), 1));
 	if (set_raycaster_struct(data))
 		return (1);
-	if (init_window(data, arg))
+	if (init_window(data))
 		return (1);
 	/*TEXTURES STRUCT*/
 	if (set_textures(data, config))

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+         #
+#    By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/30 12:10:09 by miparis           #+#    #+#              #
-#    Updated: 2025/07/01 19:25:33 by saragar2         ###   ########.fr        #
+#    Updated: 2025/07/03 11:20:02 by miparis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 NAME		= cub3D
 
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS		= -Wall -Wextra -Werror -g3
 MLXFLAGS	= -lXext -lX11 -lm -lz 
 
 INCLUDES	= -Iincludes -Iincludes/libft -Iincludes/minilibx-linux
@@ -38,7 +38,7 @@ MY_SOURCES	= src/main.c \
 				src/graphics/window_textures.c \
 				src/graphics/set_player.c \
 				src/graphics/clean_memory.c \
-				src/raycaster/1.c \
+				src/raycaster/rayseter.c \
 				src/raycaster/movement.c
 
 OBJS		= ${MY_SOURCES:.c=.o}

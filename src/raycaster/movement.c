@@ -3,14 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 18:53:49 by saragar2          #+#    #+#             */
-/*   Updated: 2025/07/02 02:09:41 by saragar2         ###   ########.fr       */
+/*   Updated: 2025/07/03 11:26:20 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+
+/*	MODIFICAR MOVIMIENTO PARA QUE SEA PROCENTUAL A LA CASILLA QUE ESTA */
+int	key_control(int keycode, t_data *data)
+{
+	int	row;
+	int	col;
+
+	row = (int)data->player->pos_y;
+	col = (int)data->player->pos_x;
+	if (keycode == 65307) //if "ESC" is pressed, the program closes in a clean way
+		go_exit(data);
+	// if (keycode == 65361 || keycode == 65362 || keycode == 65363 || keycode == 65364
+	// || keycode == 65451 || keycode == 65453) //if any arrow or the "+" or "-" are pressed, we enter
+	// //to move_left_right, in image.c
+	if (keycode == 97 && !touch(data, row, col - 1))
+		data->player->pos_x -= 1;
+	if (keycode == 119 && !touch(data, row - 1, col))
+		data->player->pos_y -= 1;
+	if (keycode == 100 && !touch(data, row, col + 1))
+		data->player->pos_x += 1;
+	if (keycode == 115 && !touch(data, row + 1, col))
+		data->player->pos_y += 1;
+	if (keycode == 65361)
+		data->player->angle_flag -= 0.1;
+	if (keycode == 65363)
+		data->player->angle_flag += 0.1;
+	set_minimap(data);
+	return (0);
+}
 
 int	touch(t_data *data, int px, int py)
 {
@@ -20,8 +50,6 @@ int	touch(t_data *data, int px, int py)
 }
 // if (px < 0 || py < 0 || (size_t) px >= data->map->width || (size_t) py >= data->map->height)
 // 	return (1);
-
-#include <math.h> // Para sin/cos/tan
 
 void	draw_rays(t_data *data)
 {

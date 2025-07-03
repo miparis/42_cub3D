@@ -6,19 +6,17 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 15:41:18 by miparis           #+#    #+#             */
-/*   Updated: 2025/06/26 14:49:48 by miparis          ###   ########.fr       */
+/*   Updated: 2025/07/03 11:19:06 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int	init_window(t_data *data, t_argument *arg)
+int	init_window(t_data *data)
 {
 	size_t	width;
 	size_t	height;
 
-	//el ancho y alto de la ventana son variables, se calculan segun el mapa
-	(void)arg;
 	width = SCREEN_WIDTH;
 	height = SCREEN_HEIGHT;
 	printf("\n  WIDTH = [%zu] - HEIGHT = [%zu]\n", width, height);

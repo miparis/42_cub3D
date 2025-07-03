@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 12:11:37 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/02 02:10:04 by saragar2         ###   ########.fr       */
+/*   Updated: 2025/07/03 11:24:08 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,15 +144,15 @@ int	object_player_validation(char *line, t_argument *arg_map);
 int	set_graphics(t_data *data, t_argument *arg);
 int	calculate_coordanates(t_data *data);
 int	upload_textures(t_data *data, t_textures *textures, t_config *cfig);
-int	init_window(t_data *data, t_argument *arg);
+int	init_window(t_data *data);
 
 /*				PLAYER										*/
 int	set_position(t_data *data);
 int	set_orientation(t_data *data);
 
 /*				RAYCASTER										*/
-void put_pixel(t_data *data, int x, int y, int color);
-int	set_minimap(t_data *data);
+void	put_pixel(t_data *data, int x, int y, int color);
+int		set_minimap(t_data *data);
 int	touch(t_data *data, int px, int py);
 void	draw_rays(t_data *data);
 
@@ -175,4 +175,5 @@ void print_all(t_argument *arg_map, t_config *config);
 /*		hola miranda no se donde meter estas funciones perdon		*/
 int	key_control(int keycode, t_data *data);
 int go_exit(t_data *data);
+
 #endif
