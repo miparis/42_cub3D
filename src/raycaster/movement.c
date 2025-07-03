@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 18:53:49 by saragar2          #+#    #+#             */
-/*   Updated: 2025/07/03 16:03:46 by miparis          ###   ########.fr       */
+/*   Updated: 2025/07/03 16:14:47 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	update_position(t_data *data, double x, double y)
 	return (0);
 }
 
-int	touch(t_data *data, int px, int py)
+/*int	touch(t_data *data, int px, int py)
 {
 	// Asegurarse de que px y py estén dentro de los límites del mapa para evitar segfaults
 	if (py < 0 || py >= (int)data->map->height || px < 0 || px >= (int)ft_strlen(data->map->map[py]))
@@ -36,6 +36,26 @@ int	touch(t_data *data, int px, int py)
 	if (data->map->map[px][py] == '1')
 		return (1);
 	return (0);
+}*/
+int touch(t_data *data, int px_map_y, int py_map_x) // Renombré para mayor claridad
+{
+    // Asegurarse de que las coordenadas estén dentro de los límites válidos del mapa.
+    // px_map_y es la fila (Y) y py_map_x es la columna (X).
+    
+    // Primero, verifica que la fila (py_map_y) sea válida antes de intentar obtener su longitud.
+    if (px_map_y < 0 || px_map_y >= (int)data->map->height)
+        return (1); // Fuera de los límites verticales (es una pared)
+
+    // Ahora que la fila es válida, podemos obtener su longitud.
+    // Comprueba los límites horizontales (py_map_x)
+    if (py_map_x < 0 || py_map_x >= (int)ft_strlen(data->map->map[px_map_y]))
+        return (1); // Fuera de los límites horizontales (es una pared)
+
+    // Acceder al mapa como [fila][columna] -> [px_map_y][py_map_x]
+    if (data->map->map[px_map_y][py_map_x] == '1')
+        return (1); // Es una pared
+    
+    return (0); // No es una pared
 }
 
 int	key_control(int keycode, t_data *data)

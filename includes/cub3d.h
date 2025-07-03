@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 12:11:37 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/03 14:38:29 by miparis          ###   ########.fr       */
+/*   Updated: 2025/07/03 16:25:55 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct  s_img				t_img;
 # define SCREEN_WIDTH 1280
 # define SCREEN_HEIGHT 720
 # define FOV 60
-# define NUM_RAYS 100 // Cantidad de rayos que se lanzarán
+# define NUM_RAYS 1000 // Cantidad de rayos que se lanzarán
 # define RAY_STEP 0.05 // Qué tan preciso es el paso de cada rayo
 # define M_PI 3.14159265358979323846
 # define M_SPEED 0.1 
