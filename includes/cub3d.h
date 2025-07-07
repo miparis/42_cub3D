@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 12:11:37 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/03 17:08:46 by miparis          ###   ########.fr       */
+/*   Updated: 2025/07/07 14:57:07 by saragar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct  s_img				t_img;
 # define SCREEN_WIDTH 1280
 # define SCREEN_HEIGHT 720
 # define FOV 60
-# define NUM_RAYS 1000 // Cantidad de rayos que se lanzarán
+# define NUM_RAYS 100000 // Cantidad de rayos que se lanzarán
 # define RAY_STEP 0.05 // Qué tan preciso es el paso de cada rayo
 # define M_PI 3.14159265358979323846
 # define M_SPEED 0.1 
@@ -95,8 +95,8 @@ struct s_player
 {
 	double	angle; // Angulo de vision del jugador, en radianes
 	double	angle_flag;
-	double	pos_x;
-	double	pos_y;
+	float	pos_x;
+	float	pos_y;
 	double	dir_x; //vector direccion a la que esta mirando el jugador 
 	double	dir_y; //vector direccion a la que esta mirando el jugador 
 	double	plane_x; //vector perpendicular a la direccion, determina el campo de vision
@@ -157,7 +157,7 @@ int	set_orientation(t_data *data);
 void	put_pixel(t_data *data, int x, int y, int color);
 int		set_minimap(t_data *data);
 int		touch(t_data *data, int px, int py);
-void	draw_rays(t_data *data);
+void	draw_rays(t_data *data, double ray_angle, int i);
 int		key_control(int keycode, t_data *data);
 
 /* 								MEMORY ALLOC & SETTING                 */
@@ -174,5 +174,6 @@ void	free_data(t_data *data);
 
 /*							TEST						*/
 void print_all(t_argument *arg_map, t_config *config);
+int		draw_loop(t_data *data);
 
 #endif

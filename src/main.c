@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 12:16:16 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/03 17:21:18 by miparis          ###   ########.fr       */
+/*   Updated: 2025/07/06 21:10:50 by saragar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	main(int argc, char **argv)
 
 	mlx_hook(data.w_ptr, 2, 1L << 0, key_control, &data);
 	mlx_hook(data.w_ptr, 17, 0, go_exit, &data);
+	mlx_loop_hook(data.mlx_ptr, draw_loop, &data);
 	mlx_loop(data.mlx_ptr);
 	printf("MIAU MIAU\n");
 	return (0);

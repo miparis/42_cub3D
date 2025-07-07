@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window_textures.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 15:41:18 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/03 11:19:06 by miparis          ###   ########.fr       */
+/*   Updated: 2025/07/07 14:23:06 by saragar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

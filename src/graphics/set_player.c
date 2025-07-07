@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_player.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 10:08:27 by miparis           #+#    #+#             */
-/*   Updated: 2025/06/25 11:14:04 by miparis          ###   ########.fr       */
+/*   Updated: 2025/07/07 15:06:16 by saragar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,21 +54,25 @@ int	set_orientation(t_data *data)
 	if (data->map->orientation == 'N')
 	{
 		set_dir(0.0, -1.0, data->player);
+		data->player->angle = 3 * M_PI / 2; // Set the angle to 90 degrees for North orientation
 		return (set_plane(FOV, 0.0, data->player), 0);
 	}
 	else if (data->map->orientation == 'S')
 	{
 		set_dir(0.0, 1.0, data->player);
+		data->player->angle = M_PI / 2; // Set the angle to 180 degrees for South orientation
 		return (set_plane(-FOV, 0.0, data->player), 0);
 	}
 	else if (data->map->orientation == 'E')
 	{
 		set_dir(1.0, 0.0, data->player);
+		data->player->angle = 0; // Set the angle to 0 degrees for East orientation	
 		return (set_plane(0.0, FOV, data->player), 0);
 	}
 	else if (data->map->orientation == 'W')
 	{
 		set_dir(-1.0, 0.0, data->player);
+		data->player->angle = M_PI; // Set the angle to 180 degrees for West orientation
 		return (set_plane(0.0, -FOV, data->player), 0);
 	}
 	else
