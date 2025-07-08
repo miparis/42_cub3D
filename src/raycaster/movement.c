@@ -6,7 +6,7 @@
 /*   By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 18:53:49 by saragar2          #+#    #+#             */
-/*   Updated: 2025/07/08 16:20:07 by saragar2         ###   ########.fr       */
+/*   Updated: 2025/07/08 23:30:05 by saragar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,19 @@ int	touch(t_data *data, int px_map_y, int py_map_x)
     // px_map_y es la fila (Y) y py_map_x es la columna (X).
     // Primero, verifica que la fila (py_map_y) sea válida antes de intentar obtener su longitud.
 	if (px_map_y < 0 || px_map_y >= (int)data->map->height)
+	{
+		printf("collision, px_map_y: %i\n", px_map_y);
 		return (1);
+	}
     // Comprueba los límites horizontales (py_map_x)
 	if (py_map_x < 0 || py_map_x >= (int)ft_strlen(data->map->map[px_map_y]))
+	{
 		return (1);
+	}
 	if (data->map->map[px_map_y][py_map_x] == '1')
-		return (1); 
+	{
+			return (1); 
+	}
 	return (0);
 }
 
@@ -73,7 +80,7 @@ float fixed_dist(float x1, float y1, float x2, float y2, t_data *game)
 {
     float delta_x = x2 - x1;
     float delta_y = y2 - y1;
-    float angle = atan2(delta_y, delta_x) - game->player->angle;
+   	float angle = atan2(delta_y, delta_x) - game->player->angle;
     float fix_dist = distance(delta_x, delta_y) * cos(angle);
     return fix_dist;
 }
@@ -84,17 +91,21 @@ static void draw_line(t_player *player, t_data *game, float start_x, int i)
     float sin_angle = sin(start_x);
     float ray_x = player->pos_x;
     float ray_y = player->pos_y;
-
-    while(!touch(game, ray_x, ray_y))
+	float fov_y = FOV * SCREEN_HEIGHT / SCREEN_WIDTH;
+	float proj_plane_height = 2 * tan(fov_y / 2);
+	
+    while(!touch(game, ray_y, ray_x))
     {
-        ray_x += cos_angle;
-        ray_y += sin_angle;
+        ray_x += cos_angle * 0.05; //esto y lo de abajo es lo que se usa para suavizar los bordes/ojo de pez
+        ray_y += sin_angle * 0.05;
     }
-	float dist = (fixed_dist(player->pos_x, player->pos_y, ray_x, ray_y, game)) * 10;
-	float height = (TILE_SIZE / dist) * (SCREEN_WIDTH / 2);
-	int start_y = (SCREEN_HEIGHT - height) / 2;
-	int end = start_y + height;
-	while(start_y < end)
+	//printf("hola?-----------------------------\n");
+	float dist = (fixed_dist(player->pos_x, player->pos_y, ray_x, ray_y, game));
+	float height = ((1 / dist) / (proj_plane_height) * SCREEN_HEIGHT);
+
+	float start_y = (SCREEN_HEIGHT - height) / 2;
+	float end = start_y + height;
+	while(start_y < end && (i >= 0 && start_y >= 0 && i < game->img->width && start_y < game->img->height)) //para que no salten los errores, he puesto la segunda condicion. PERO no se pintan las paredes laterales
 	{
 		put_pixel(game, i, start_y, 0xff0000);
 		start_y++;
@@ -114,8 +125,8 @@ int draw_loop(t_data *game)
 	
 	player->angle += player->angle_flag;
     clear_image(game);
-    float fraction = M_PI / 3 / SCREEN_WIDTH;
-    float start_x = player->angle - M_PI / 6;
+    float fraction = FOV / SCREEN_WIDTH;
+    float start_x = player->angle - FOV / 2;
     int i = 0;
     while(i < SCREEN_WIDTH)
     {
@@ -130,6 +141,5 @@ int draw_loop(t_data *game)
 		printf("\nError: Failed to allocate MLX, window or image\n");
 		exit (1);
 	}
-    mlx_put_image_to_window(game->mlx_ptr, game->w_ptr, game->img_ptr, 0, 0);
     return 0;
 }

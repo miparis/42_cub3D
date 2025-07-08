@@ -6,7 +6,7 @@
 /*   By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 10:08:27 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/07 15:06:16 by saragar2         ###   ########.fr       */
+/*   Updated: 2025/07/08 20:40:32 by saragar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	set_position(t_data *data)
 			{
 				data->player->pos_x = (double)j + 0.5;
 				data->player->pos_y = (double)i + 0.5;
+				printf("player pos: %i %i\n", i, j);
 				data->map->map[i][j] = '0';
 				return (0);
 			}

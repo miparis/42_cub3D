@@ -6,7 +6,7 @@
 /*   By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 15:41:18 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/07 14:23:06 by saragar2         ###   ########.fr       */
+/*   Updated: 2025/07/08 22:02:34 by saragar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	init_window(t_data *data)
 	width = SCREEN_WIDTH;
 	height = SCREEN_HEIGHT;
 	printf("\n  WIDTH = [%zu] - HEIGHT = [%zu]\n", width, height);
-	data->w_ptr = mlx_new_window(data->mlx_ptr, width, height, "Cub3D");
+	data->w_ptr = mlx_new_window(data->mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT, "Cub3D");
 	if (!data->w_ptr)
 		return (error_msg("\nError: Failed to create window\n"), 1);
 	data->img_ptr = mlx_new_image(data->mlx_ptr, width, height);

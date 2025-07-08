@@ -6,7 +6,7 @@
 /*   By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 12:16:16 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/06 21:10:50 by saragar2         ###   ########.fr       */
+/*   Updated: 2025/07/08 23:32:10 by saragar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,3 +33,9 @@ int	main(int argc, char **argv)
 	printf("MIAU MIAU\n");
 	return (0);
 }
+
+//------------------NOTAS
+//Para cambiar los bordes, movement.c:99
+//si te chocas con una pared, se bloquea. UPDATE: al poner lo de la cuarta linea de notas se ha arrglado (?
+//en cuanto te acercas a una pared, el programa llora que flipas (entre otros, hay valores que pasan a negativo o superan el ancho de la pantalla)
+//revisa movement.c:108
