@@ -6,7 +6,7 @@
 /*   By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 11:39:03 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/07 15:21:35 by saragar2         ###   ########.fr       */
+/*   Updated: 2025/07/08 16:10:46 by saragar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void put_pixel(t_data *data, int x, int y, int color)
 	}
 	else if (y >= data->img->height)
 	{
-		printf("\n DEBUG y value: %d\n", y);
 		error_msg("\nError: Invalid map dimensions y heigth\n");
 		return ;
 	}
@@ -49,40 +48,8 @@ void put_pixel(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-// static void draw_minimap(t_data *data)
-// {
-// 	int	x;
-// 	int	y;
-// 	int row;
-// 	int col;
-// 	int color;
-	
-// 	row = -1;
-// 	while (++row < (int)data->map->height)
-// 	{
-// 		col = -1;
-// 		while (++col < (int)data->map->width)
-// 		{
-// 			if (data->map->map[row][col] == '1')
-// 				color = data->config->ceiling_color;
-// 			else
-// 				color = data->config->floor_color;
-// 			y = -1;
-// 			while (++y < data->img->scale_y)
-// 			{
-// 				x = -1;
-// 				while (++x < data->img->scale_x)
-// 					put_pixel(data, (col * data->img->scale_x + x), (row * data->img->scale_y + y) , color);
-// 			}
-// 		}
-// 	}
-// }
-
 int	set_minimap(t_data *data)
 {
 	draw_loop(data);
-	// draw_minimap(data);
-	// draw_rays(data);;
-	// mlx_put_image_to_window(data->mlx_ptr, data->w_ptr, data->img_ptr, 0, 0);
 	return (0);
 }
