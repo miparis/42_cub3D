@@ -6,7 +6,7 @@
 /*   By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 18:53:49 by saragar2          #+#    #+#             */
-/*   Updated: 2025/07/08 23:30:05 by saragar2         ###   ########.fr       */
+/*   Updated: 2025/07/09 17:47:44 by saragar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,9 @@ int	touch(t_data *data, int px_map_y, int py_map_x)
 	}
     // Comprueba los límites horizontales (py_map_x)
 	if (py_map_x < 0 || py_map_x >= (int)ft_strlen(data->map->map[px_map_y]))
-	{
 		return (1);
-	}
 	if (data->map->map[px_map_y][py_map_x] == '1')
-	{
-			return (1); 
-	}
+		return (1);
 	return (0);
 }
 
@@ -68,6 +64,7 @@ int	key_control(int keycode, t_data *data)
 		data->player->angle_flag -= R_SPEED;
 	if (keycode == 65363) // Derecha
 		data->player->angle_flag += R_SPEED;
+	mlx_put_image_to_window(data->mlx_ptr, data->w_ptr, data->img_ptr, 0, 0);
 	set_minimap(data);
 	return (0);
 }
@@ -96,16 +93,15 @@ static void draw_line(t_player *player, t_data *game, float start_x, int i)
 	
     while(!touch(game, ray_y, ray_x))
     {
-        ray_x += cos_angle * 0.05; //esto y lo de abajo es lo que se usa para suavizar los bordes/ojo de pez
-        ray_y += sin_angle * 0.05;
+        ray_x += cos_angle * 0.02; //esto y lo de abajo es lo que se usa para suavizar los bordes/ojo de pez
+        ray_y += sin_angle * 0.02;
     }
-	//printf("hola?-----------------------------\n");
 	float dist = (fixed_dist(player->pos_x, player->pos_y, ray_x, ray_y, game));
 	float height = ((1 / dist) / (proj_plane_height) * SCREEN_HEIGHT);
 
 	float start_y = (SCREEN_HEIGHT - height) / 2;
 	float end = start_y + height;
-	while(start_y < end && (i >= 0 && start_y >= 0 && i < game->img->width && start_y < game->img->height)) //para que no salten los errores, he puesto la segunda condicion. PERO no se pintan las paredes laterales
+	while(start_y < end)
 	{
 		put_pixel(game, i, start_y, 0xff0000);
 		start_y++;

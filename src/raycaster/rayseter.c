@@ -6,7 +6,7 @@
 /*   By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 11:39:03 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/08 22:47:27 by saragar2         ###   ########.fr       */
+/*   Updated: 2025/07/09 17:37:48 by saragar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,26 +25,8 @@ void put_pixel(t_data *data, int x, int y, int color)
 	char	*dst;
 
 
-	if (x < 0)
-	{
-		error_msg("\nError: Invalid map dimensions x\n");
+	if (x < 0 || y < 0 || x >= data->img->width || y >= data->img->height)
 		return ;
-	}
-	else if (y < 0)
-	{
-		error_msg("\nError: Invalid map dimensions y\n");
-		return ;
-	}
-	else if (x >= data->img->width)
-	{
-		error_msg("\nError: Invalid map dimensions x width\n");
-		return ;
-	}
-	else if (y >= data->img->height)
-	{
-		error_msg("\nError: Invalid map dimensions y heigth\n");
-		return ;
-	}
 	dst = data->img_data + (y * data->img->line_len + x * (data->img->bpp / 8));
 	*(unsigned int *)dst = color;
 	
@@ -131,7 +113,6 @@ int	set_minimap(t_data *data)
 	//-------DEBUG---------
 	// draw_minimap(data);
 	// draw_rays(data);
-	mlx_put_image_to_window(data->mlx_ptr, data->w_ptr, data->img_ptr, 0, 0);
 	//---------------------
 	return (0);
 }
