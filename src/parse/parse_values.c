@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:35:59 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/03 17:39:37 by miparis          ###   ########.fr       */
+/*   Updated: 2025/07/10 17:03:14 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,12 @@ int	parse_color(char *line, int *color_dest, bool *flag)
 	r = ft_atoi(rgb[0]);
 	g = ft_atoi(rgb[1]);
 	b = ft_atoi(rgb[2]);
+	printf("Parsed RGB: R=%d, G=%d, B=%d\n", r, g, b);
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
 		return (free_split(rgb), error_msg("\nError: RGB out of range\n"), 1);
-	*color_dest = (r << 16) | (g << 8) | b;//mueve cada uno de los colores a un formato como 0xRRGGBB,  moviendo los bits de mayor a menor
+	//*color_dest = (r << 16) | (g << 8) | b;//mueve cada uno de los colores a un formato como 0xRRGGBB,  moviendo los bits de mayor a menor
+	//*color_dest = (b << 16) | (g << 8) | r;
+	*color_dest = (b << 16) | (g << 8) | r; // Esto genera 0x00BBGGRR
+	printf("Final color_dest (hex): 0x%X\n", *color_dest);
 	return ((*flag = true), free_split(rgb), 0);
 }

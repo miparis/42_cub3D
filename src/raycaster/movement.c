@@ -6,11 +6,32 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 18:53:49 by saragar2          #+#    #+#             */
-/*   Updated: 2025/07/10 13:00:41 by miparis          ###   ########.fr       */
+/*   Updated: 2025/07/10 17:10:57 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+static	void rotate_camera(t_data *data, int keycode)
+{
+	double old_dir_x;
+	double old_plane_x;
+	double r_speed;
+
+	r_speed = 0;
+	if (keycode == 65363) //izquierda
+		r_speed = R_SPEED;
+	else if (keycode == 65361) //derecha
+		r_speed = -R_SPEED;
+	old_dir_x = data->player->dir_x;
+	old_plane_x = data->player->plane_x;
+	data->player->dir_x = old_dir_x * cos(r_speed) - data->player->dir_y * sin(r_speed);
+	data->player->dir_y = old_dir_x * sin(r_speed) + data->player->dir_y * cos(r_speed);
+	data->player->plane_x = old_plane_x * cos(r_speed) - data->player->plane_y * sin(r_speed);
+	data->player->plane_y = old_plane_x * sin(r_speed) + data->player->plane_y * cos(r_speed);
+	data->player->angle += r_speed; //actualiza el angulo del jugador
+}
+
 
 /*Actualizando las corrdenadas del jugador. 
 Se chequea las colisiones por celda (X e Y) y luego se actualiza			*/
@@ -66,9 +87,9 @@ int	key_control(int keycode, t_data *data)
 		update_position(data, sin(data->player->angle) * M_SPEED,
 			cos(data->player->angle) * -M_SPEED);
 	if (keycode == 65361) // Izquierda
-		data->player->angle_flag -= R_SPEED;
+		rotate_camera(data, 65361);
 	if (keycode == 65363) // Derecha
-		data->player->angle_flag += R_SPEED;
+		rotate_camera(data, 65363);
 	mlx_put_image_to_window(data->mlx_ptr, data->w_ptr, data->img_ptr, 0, 0);
 	set_minimap(data);
 	return (0);
@@ -100,7 +121,7 @@ float	fixed_dist(float x1, float y1, float x2, float y2, t_data *game)
 	fix_dist = distance(delta_x, delta_y) * cos(angle);
 	return (fix_dist);
 }
-
+/*
 static void	draw_line(t_player *player, t_data *game, float start_x, int i)
 {
     float cos_angle = cos(start_x); //Se calculan segun el angulo del rayo en base a la pos actual
@@ -129,7 +150,7 @@ static void	draw_line(t_player *player, t_data *game, float start_x, int i)
 		put_pixel(game, i, start_y, 0xff0000); //Aqui tenemos que poner la asignacion de texutras segun el DDA
 		start_y++;
 	}
-}
+}*/
 
 static void clear_image(t_data *game)
 {
@@ -156,23 +177,25 @@ static void clear_image(t_data *game)
 
 int draw_loop(t_data *game)
 {
-    t_player *player = game->player;
+    // t_player *player = game->player;
 	
-	//Guardamos y modificamos directamente el vector del jugador
-	player->angle += player->angle_flag; //angulo absoluto del jugador o delta de rotacion
+	////Guardamos y modificamos directamente el vector del jugador
+	// player->angle += player->angle_flag; //angulo absoluto del jugador o delta de rotacion
     clear_image(game);
-    float fraction = FOV / SCREEN_WIDTH; //Calcula el incremento angular para cada rayo (columna).
-    float start_x = player->angle - FOV / 2; //Ángulo del primer rayo (extremo izquierdo del FOV).
+	put_floor_ceiling(game);
+    //float fraction = FOV / SCREEN_WIDTH; //Calcula el incremento angular para cada rayo (columna).
+    //float start_x = player->angle - FOV / 2; //Ángulo del primer rayo (extremo izquierdo del FOV).
     int i = 0;
 
     while(i < SCREEN_WIDTH)//itera columna por columna pintandolo
     {
-		player->angle_flag = 0; 
-        draw_line(player, game, start_x, i);
-        start_x += fraction; //siguiente rayo ya tu sabe
+		//player->angle_flag = 0; 
+        //draw_line(player, game, start_x, i);
+		draw_line(game, i); //Dibuja la columna del rayo
+        //start_x += fraction; //siguiente rayo ya tu sabe
         i++;
     }
-
+	//mlx_put_image_to_window(game->mlx_ptr, game->w_ptr, game->img_ptr, 0, 0);
 	if (game->mlx_ptr == NULL || game->w_ptr == NULL || game->img == NULL)
 	{
 		error_msg("\nError: Failed to allocate MLX, window or image\n");

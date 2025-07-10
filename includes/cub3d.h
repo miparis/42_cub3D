@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 12:11:37 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/09 17:45:38 by saragar2         ###   ########.fr       */
+/*   Updated: 2025/07/10 16:37:24 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,10 @@ typedef struct  s_data				t_data;
 typedef struct  s_textures			t_textures;
 typedef struct  s_player			t_player;
 typedef struct  s_img				t_img;
+typedef struct  s_ray				t_ray;
 
 # define TILE_SIZE 64
-# define SCREEN_WIDTH 720
+# define SCREEN_WIDTH 1200
 # define SCREEN_HEIGHT 720
 
 # define NUM_RAYS 100000 // Cantidad de rayos que se lanzarán
@@ -97,8 +98,8 @@ struct s_player
 {
 	double	angle; // Angulo de vision del jugador, en radianes
 	double	angle_flag;
-	float	pos_x;
-	float	pos_y;
+	double	pos_x;
+	double	pos_y;
 	double	dir_x; //vector direccion a la que esta mirando el jugador 
 	double	dir_y; //vector direccion a la que esta mirando el jugador 
 	double	plane_x; //vector perpendicular a la direccion, determina el campo de vision
@@ -128,6 +129,38 @@ struct s_data
 	t_config	*config;	
 	t_img		*img;
 };
+
+struct s_ray
+{
+	int		line_height;
+	int     draw_start;
+    int     draw_end;
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+	int		map_x;
+	int		map_y;
+	
+	//Variables del DDA
+	double  delta_dist_x; // Distancia para recorrer 1 unidad en X a lo largo del rayo
+    double  delta_dist_y; // Distancia para recorrer 1 unidad en Y a lo largo del rayo
+	double	side_dist_x;
+	double	side_dist_y;
+	int		step_x;
+	int		step_y;
+
+	//Calculos del DDA
+	bool	hit; // 1 si el rayo ha tocado una pared, 0 si no
+	int		side; // 0 si el rayo ha tocado una pared vertical, 1 si ha tocado una pared horizontal
+	double	perp_wall_dist; // Distancia perpendicular desde el jugador al rayo. Para ojo de pez
+	
+	// Texturas
+    double  wall_hit_x;  // Coordenada exacta X en el muro donde el rayo impactó
+    double  wall_hit_y;  // Coordenada exacta Y en el muro donde el rayo impactó
+};
+
+
 
 /*								UTILS													*/
 int	error_msg(const char *error);
@@ -159,8 +192,10 @@ int	set_orientation(t_data *data);
 void	put_pixel(t_data *data, int x, int y, int color);
 int		set_minimap(t_data *data);
 int		touch(t_data *data, int px, int py);
-void	draw_rays(t_data *data);
+//void	draw_rays(t_data *data);
+void	draw_line(t_data *game, int start_x);
 int		key_control(int keycode, t_data *data);
+void	put_floor_ceiling(t_data *game);
 
 /* 								MEMORY ALLOC & SETTING                 */
 int	alloc_set(t_config **config, t_config_flags **flags, t_argument *arg);

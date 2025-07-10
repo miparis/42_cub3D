@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+         #
+#    By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/30 12:10:09 by miparis           #+#    #+#              #
-#    Updated: 2025/07/09 16:46:35 by saragar2         ###   ########.fr        #
+#    Updated: 2025/07/10 15:29:33 by miparis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,8 @@ MY_SOURCES	= src/main.c \
 				src/graphics/set_player.c \
 				src/graphics/clean_memory.c \
 				src/raycaster/rayseter.c \
-				src/raycaster/movement.c
+				src/raycaster/movement.c \
+				src/raycaster/DDA.c \
 
 OBJS		= ${MY_SOURCES:.c=.o}
 
