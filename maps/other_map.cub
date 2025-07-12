@@ -1,7 +1,7 @@
-NO                         ./textures/colors/1.xpm
-EA ./textures/colors/2.xpm
-SO                               ./textures/colors/3.xpm
-WE ./textures/colors/4.xpm
+NO                        ./textures/others/planks.xpm
+EA ./textures/others/purplestone.xpm
+SO                       ./textures/others/redbrick.xpm
+WE ./textures/others/wood.xpm
 
 C 204,255,229
 F 255, 178, 102

@@ -6,7 +6,7 @@
 #    By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/30 12:10:09 by miparis           #+#    #+#              #
-#    Updated: 2025/07/10 15:29:33 by miparis          ###   ########.fr        #
+#    Updated: 2025/07/12 11:13:58 by miparis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ MY_SOURCES	= src/main.c \
 				src/raycaster/rayseter.c \
 				src/raycaster/movement.c \
 				src/raycaster/DDA.c \
+				src/raycaster/textures_draw.c
 
 OBJS		= ${MY_SOURCES:.c=.o}
 

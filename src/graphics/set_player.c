@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_player.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 10:08:27 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/09 17:41:36 by saragar2         ###   ########.fr       */
+/*   Updated: 2025/07/12 12:29:13 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	set_position(t_data *data)
 			{
 				data->player->pos_x = (double)j + 0.5;
 				data->player->pos_y = (double)i + 0.5;
-				printf("player pos: %li %li\n", i, j);
+				//printf("player pos: %li %li\n", i, j);
 				data->map->map[i][j] = '0';
 				return (0);
 			}

@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 12:11:37 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/10 16:37:24 by miparis          ###   ########.fr       */
+/*   Updated: 2025/07/12 11:13:25 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,25 @@ struct s_argument
 	t_config	*config;
 };
 
+struct s_img
+{
+	int		bpp; //bits per pixel
+	int		line_len; //bytes ocupados por cada linea de pixeles en la img
+	int		endian; //endianness de la imagen
+	int		width;
+	int		height;
+	int		scale_y;
+	int		scale_x;
+	void	*img_ptr;
+	char	*addr; //puntero al inicio del bufer de la imagen
+};
+
 struct s_textures
 {
-	void	*no_texture;
-	void	*so_texture;
-	void	*we_texture;
-	void	*ea_texture;
+	t_img	no_texture;
+	t_img	so_texture;
+	t_img	we_texture;
+	t_img	ea_texture;
 };
 
 struct s_player
@@ -104,17 +117,6 @@ struct s_player
 	double	dir_y; //vector direccion a la que esta mirando el jugador 
 	double	plane_x; //vector perpendicular a la direccion, determina el campo de vision
 	double	plane_y; //vector perpendicular a la direccion, determina el campo de vision
-};
-
-struct s_img
-{
-	int		bpp; //bits per pixel
-	int		line_len; //bytes ocupados por cada linea de pixeles en la img
-	int		endian; //endianness de la imagen
-	int		width;
-	int		height;
-	int		scale_y;
-	int		scale_x;
 };
 
 struct s_data
@@ -158,8 +160,9 @@ struct s_ray
 	// Texturas
     double  wall_hit_x;  // Coordenada exacta X en el muro donde el rayo impactó
     double  wall_hit_y;  // Coordenada exacta Y en el muro donde el rayo impactó
+	double  wall_x_text;
+	double  wall_y_text;
 };
-
 
 
 /*								UTILS													*/
@@ -192,10 +195,11 @@ int	set_orientation(t_data *data);
 void	put_pixel(t_data *data, int x, int y, int color);
 int		set_minimap(t_data *data);
 int		touch(t_data *data, int px, int py);
-//void	draw_rays(t_data *data);
 void	draw_line(t_data *game, int start_x);
 int		key_control(int keycode, t_data *data);
 void	put_floor_ceiling(t_data *game);
+void	draw_texture_column(t_data *data, t_ray *ray, int x, t_img *texture);
+void	calc_texture_wall(t_ray *ray, int current_width);
 
 /* 								MEMORY ALLOC & SETTING                 */
 int	alloc_set(t_config **config, t_config_flags **flags, t_argument *arg);

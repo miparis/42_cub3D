@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 14:49:38 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/03 11:19:44 by miparis          ###   ########.fr       */
+/*   Updated: 2025/07/12 12:30:00 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,6 @@ static int	set_player(t_data *data)
 		return (1);
 	if (set_orientation(data))
 		return (1);
-	printf("Player position set to: (%.2f, %.2f)\n",
-		data->player->pos_x, data->player->pos_y);
-	printf("Player direction set to: (%.2f, %.2f)\n",
-		data->player->dir_x, data->player->dir_y);
-	printf("Player plane set to: (%.2f, %.2f)\n",
-		data->player->plane_x, data->player->plane_y);
 	return (0);
 }
 

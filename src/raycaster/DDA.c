@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 13:04:26 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/10 17:11:07 by miparis          ###   ########.fr       */
+/*   Updated: 2025/07/12 12:24:18 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,42 +143,46 @@ static void draw_limits(t_ray *ray)
 
 static void	draw_ray(t_data *game, t_ray *ray, float start_x)
 {
-	int		y_pix;
-	int		wall_def;//podemos cambiar para poner text
+	//int		y_pix;
+	//int		wall_def;//podemos cambiar para poner text
+	t_img	*current_texture;
 
 	if (ray->side == 0)
 	{
 		if (ray->dir_x > 0) //lado este
 		{
-			//wall_def = game->map->config->ea_path; //textura este
-			wall_def = 0x0000FF; // Azul para Este
+			current_texture = &game->textures->ea_texture; //textura este
+			//wall_def = 0x0000FF; // Azul para Este
 		}
 		else //lado oeste
         {
-			//wall_def = game->map->config->we_path; //textura este
-			wall_def = 0x00FF00; // Verde para Oeste
+			current_texture = &game->textures->we_texture; //textura este
+			//wall_def = 0x00FF00; // Verde para Oeste
 		}
 	}
 	else // Lado Y (horizontal en el mapa, rayo golpeó un eje X)
     {
         if (ray->dir_y > 0) //Sur
         {
-			//wall_def = game->map->config->so_path; //textura este
-			wall_def = 0xFFFF00; // Amarillo para Sur
+			current_texture = &game->textures->so_texture; //textura este
+			//wall_def = 0xFFFF00; // Amarillo para Sur
 		}
 		else // Rayo va hacia arriba, golpeó lado Norte
         {
-			//wall_def = game->map->config->no_path; //textura este
-			wall_def = 0xFF0000; // Rojo para Norte
+			current_texture = &game->textures->no_texture; //textura este
+			//wall_def = 0xFF0000; // Rojo para Norte
 		}
     }
+	calc_texture_wall(ray, current_texture->width); //calcula coordenada de textura
+	draw_texture_column(game, ray, start_x, current_texture); //dibuja la columna de textura
+	/*
 	y_pix = ray->draw_start;
 	while (y_pix <= ray->draw_end)
 	{
 		//aqui poner textura
 		put_pixel(game, start_x, y_pix, wall_def); // Dibuja el pixel con el color de la pared
 		y_pix++;
-	}
+	}*/
 }
 
 void put_floor_ceiling(t_data *game)
