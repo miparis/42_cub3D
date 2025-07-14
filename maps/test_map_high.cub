@@ -1,7 +1,7 @@
-NO                         ./textures/1.xpm
-EA ./textures/2.xpm
-SO                               ./textures/3.xpm
-WE ./textures/4.xpm
+NO                         ./textures/kitty/north_kitty.xpm
+EA ./textures/kitty/east_kitty.xpm
+SO                               ./textures/kitty/south_kitty.xpm
+WE ./textures/kitty/west_kitty.xpm
 
 C 204,255,255
 F 15,6,40

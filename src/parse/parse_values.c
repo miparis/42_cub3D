@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_values.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:35:59 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/12 10:45:38 by miparis          ###   ########.fr       */
+/*   Updated: 2025/07/14 18:37:19 by saragar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,6 @@ int	parse_color(char *line, int *color_dest, bool *flag)
 	b = ft_atoi(rgb[2]);
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
 		return (free_split(rgb), error_msg("\nError: RGB out of range\n"), 1);
-	*color_dest = (r << 16) | (g << 8) | b;//mueve cada uno de los colores a un formato como 0xRRGGBB,  moviendo los bits de mayor a menor
+	*color_dest = (r << 16) | (g << 8) | b;
 	return ((*flag = true), free_split(rgb), 0);
 }

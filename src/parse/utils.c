@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 10:22:01 by miparis           #+#    #+#             */
-/*   Updated: 2025/06/19 14:31:23 by miparis          ###   ########.fr       */
+/*   Updated: 2025/07/14 18:36:19 by saragar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ int	check_file(char *file, t_argument *arg_map)
 	return (0);
 }
 
-void print_all(t_argument *arg_map, t_config *config)
+void	print_all(t_argument *arg_map, t_config *config)
 {
-	size_t i;
+	size_t	i;
 
 	printf("NO PATH = %s\n", config->no_path);
 	printf("SO PATH = %s\n", config->so_path);
@@ -61,13 +61,12 @@ void print_all(t_argument *arg_map, t_config *config)
 	if (!arg_map->map)
 	{
 		printf("No map loaded.\n");
-		return;
+		return ;
 	}
 	printf("\nMap:\n");
-	for (i = 0; i < arg_map->height; i++)
-	{
+	i = -1;
+	while (++i < arg_map->height)
 		printf("%s\n", arg_map->map[i]);
-	}
 	printf("\n");
 	printf("Orientation: %c\n", arg_map->orientation);
 }
