@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 13:04:26 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/12 12:24:18 by miparis          ###   ########.fr       */
+/*   Updated: 2025/07/14 11:14:09 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,7 +187,6 @@ static void	draw_ray(t_data *game, t_ray *ray, float start_x)
 
 void put_floor_ceiling(t_data *game)
 {
-	// Dibuja el techo
 	int y;
 	int x;
 
@@ -226,7 +225,6 @@ void	draw_line(t_data *game, int start_x)
   ray_dda.line_height = (int)(SCREEN_HEIGHT / ray_dda.perp_wall_dist);
   draw_limits(&ray_dda);
   draw_ray(game, &ray_dda, start_x);
-  //put_floor_ceiling(game, &ray_dda, start_x);
 }
 
 

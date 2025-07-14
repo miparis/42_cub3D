@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 18:53:49 by saragar2          #+#    #+#             */
-/*   Updated: 2025/07/10 17:10:57 by miparis          ###   ########.fr       */
+/*   Updated: 2025/07/14 11:09:00 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,7 @@ static void	draw_line(t_player *player, t_data *game, float start_x, int i)
 	}
 }*/
 
+/*
 static void clear_image(t_data *game)
 {
 	int	y;
@@ -173,18 +174,18 @@ static void clear_image(t_data *game)
     //    for(int x = 0; x < SCREEN_WIDTH; x++)
     //        put_pixel(game, x, y, 0);
 }
-
+*/
+void clear_image(t_data *game)
+{
+	if (game->img_data)
+		ft_bzero(game->img_data, SCREEN_HEIGHT * game->img->line_len);;
+}
 
 int draw_loop(t_data *game)
 {
-    // t_player *player = game->player;
-	
-	////Guardamos y modificamos directamente el vector del jugador
-	// player->angle += player->angle_flag; //angulo absoluto del jugador o delta de rotacion
-    clear_image(game);
+  	clear_image(game);
 	put_floor_ceiling(game);
-    //float fraction = FOV / SCREEN_WIDTH; //Calcula el incremento angular para cada rayo (columna).
-    //float start_x = player->angle - FOV / 2; //Ángulo del primer rayo (extremo izquierdo del FOV).
+
     int i = 0;
 
     while(i < SCREEN_WIDTH)//itera columna por columna pintandolo
@@ -195,7 +196,7 @@ int draw_loop(t_data *game)
         //start_x += fraction; //siguiente rayo ya tu sabe
         i++;
     }
-	//mlx_put_image_to_window(game->mlx_ptr, game->w_ptr, game->img_ptr, 0, 0);
+	mlx_put_image_to_window(game->mlx_ptr, game->w_ptr, game->img_ptr, 0, 0);
 	if (game->mlx_ptr == NULL || game->w_ptr == NULL || game->img == NULL)
 	{
 		error_msg("\nError: Failed to allocate MLX, window or image\n");

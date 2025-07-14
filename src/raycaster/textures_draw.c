@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 10:48:12 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/12 12:26:01 by miparis          ###   ########.fr       */
+/*   Updated: 2025/07/14 10:26:49 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ static unsigned int get_pixel_color(t_img *texture, int x, int y)
 {
 	char *dst;
 	
-	if (x < 0 || x >= texture->width ||   y < 0 || y >= texture->height)
-		return (0x000000);
+	//if (x < 0 || x >= texture->width ||   y < 0 || y >= texture->height)
+	//	return (0x000000);
 	// tex_data->addr es el inicio del buffer.
     // y * tex_data->line_len salta a la fila correcta.
     // x * (tex_data->bpp / 8) salta al píxel correcto dentro de esa fila.
@@ -57,9 +57,14 @@ void	draw_texture_column(t_data *data, t_ray *ray, int x, t_img *texture)
     int   			y_pixel;  // Iterador para los píxeles verticales de la pantalla
     unsigned int	color;
 
+	//if (ray->draw_start < 0)
+    //	ray->draw_start = 0;
+	//if (ray->draw_end >= SCREEN_HEIGHT)
+	//	ray->draw_end = SCREEN_HEIGHT - 1;
 	step = 1.0 * texture->height / ray->line_height; // Calcular el paso de la textura
-	tex_pos = (ray->draw_start - (SCREEN_HEIGHT / 2 + ray->line_height / 2)) * step;	y_pixel = ray->draw_start;
-
+	//tex_pos = (ray->draw_start - (SCREEN_HEIGHT / 2 + ray->line_height / 2)) * step;	y_pixel = ray->draw_start;
+	tex_pos = (ray->draw_start - SCREEN_HEIGHT / 2 + ray->line_height / 2) * step;
+	y_pixel = ray->draw_start;
 	while (y_pixel < ray->draw_end)
 	{
 		tex_y = (int)tex_pos; // Obtener la coordenada Y de la textura

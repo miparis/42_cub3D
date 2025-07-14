@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 12:11:37 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/12 11:13:25 by miparis          ###   ########.fr       */
+/*   Updated: 2025/07/14 11:06:46 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ typedef struct  s_img				t_img;
 typedef struct  s_ray				t_ray;
 
 # define TILE_SIZE 64
-# define SCREEN_WIDTH 1200
-# define SCREEN_HEIGHT 720
+# define SCREEN_WIDTH 800
+# define SCREEN_HEIGHT 600
 
 # define NUM_RAYS 100000 // Cantidad de rayos que se lanzarán
 # define RAY_STEP 0.05 // Qué tan preciso es el paso de cada rayo
