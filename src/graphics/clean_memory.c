@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean_memory.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:28:47 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/12 10:40:59 by miparis          ###   ########.fr       */
+/*   Updated: 2025/07/14 19:38:04 by saragar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ static void	free_textures(t_data *data, t_textures *textures)
 {
 	if (!textures)
 		return ;
-	if (textures->no_texture.img_ptr != NULL)
-		mlx_destroy_image(data->mlx_ptr, textures->no_texture.img_ptr);
-	if (textures->so_texture.img_ptr != NULL)
-		mlx_destroy_image(data->mlx_ptr, textures->so_texture.img_ptr);
-	if (textures->we_texture.img_ptr != NULL)
-		mlx_destroy_image(data->mlx_ptr, textures->we_texture.img_ptr);
-	if (textures->ea_texture.img_ptr != NULL)
-		mlx_destroy_image(data->mlx_ptr, textures->ea_texture.img_ptr);
+	if (textures->no_tex.img_ptr != NULL)
+		mlx_destroy_image(data->mlx_ptr, textures->no_tex.img_ptr);
+	if (textures->so_tex.img_ptr != NULL)
+		mlx_destroy_image(data->mlx_ptr, textures->so_tex.img_ptr);
+	if (textures->we_tex.img_ptr != NULL)
+		mlx_destroy_image(data->mlx_ptr, textures->we_tex.img_ptr);
+	if (textures->ea_tex.img_ptr != NULL)
+		mlx_destroy_image(data->mlx_ptr, textures->ea_tex.img_ptr);
 	free(textures);
 }
 
