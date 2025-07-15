@@ -6,7 +6,7 @@
 /*   By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 12:11:37 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/14 19:34:54 by saragar2         ###   ########.fr       */
+/*   Updated: 2025/07/15 00:00:20 by saragar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,12 +192,23 @@ int	set_position(t_data *data);
 int	set_orientation(t_data *data);
 
 /*				RAYCASTER										*/
+void	rotate_camera(t_data *data, int keycode);
+int		update_position(t_data *data, double x, double y);
+void	dda_init(t_data *data, int screen_x, t_ray *ray);
+void	dda_calc(t_ray *ray);
+void	dda_loop(t_data *data, t_ray *ray);
+void	put_floor_ceiling(t_data *game);
 void	put_pixel(t_data *data, int x, int y, int color);
 int		set_minimap(t_data *data);
 int		touch(t_data *data, int px, int py);
 void	draw_line(t_data *game, int start_x);
+void	draw_limits(t_ray *ray);
+void	draw_ray(t_data *game, t_ray *ray, float start_x);
 int		key_control(int keycode, t_data *data);
-void	put_floor_ceiling(t_data *game);
+float	distance(float x, float y);
+float	fixed_dist(float x1, float y1, float x2, float y2, t_data *game);
+void	clear_image(t_data *game);
+int		draw_loop(t_data *game);
 void	draw_texture_column(t_data *data, t_ray *ray, int x, t_img *texture);
 void	calc_texture_wall(t_ray *ray, int current_width);
 

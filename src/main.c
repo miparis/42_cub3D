@@ -6,7 +6,7 @@
 /*   By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 12:16:16 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/14 18:29:06 by saragar2         ###   ########.fr       */
+/*   Updated: 2025/07/15 00:06:09 by saragar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	main(int argc, char **argv)
 	ft_bzero(&map_arguments, sizeof(map_arguments));
 	if (general_parse(argv, &map_arguments))
 		return (1);
-
 	if (set_graphics(&data, &map_arguments))
 		return (error_msg("\nError setting graphics\n"), 1);
 	mlx_put_image_to_window(data.mlx_ptr, data.w_ptr, data.img_ptr, 0, 0);
