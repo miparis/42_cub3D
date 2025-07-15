@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_textures.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:35:59 by miparis           #+#    #+#             */
-/*   Updated: 2025/06/19 12:56:54 by miparis          ###   ########.fr       */
+/*   Updated: 2025/07/15 13:32:43 by saragar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	parse_paths(char *line, t_config *config, t_config_flags *flags)
 	return (0);
 }
 
-int	parse_config(t_argument *arg_map, t_config *config, t_config_flags *flags)
+int	parse_config(t_argument *arg_map, t_config *cf, t_config_flags *flags)
 {
 	char	*line;
 
@@ -70,12 +70,12 @@ int	parse_config(t_argument *arg_map, t_config *config, t_config_flags *flags)
 			|| !ft_strncmp(line, "WE", 2) || !ft_strncmp(line, "EA", 2))
 		{
 			arg_map->line_count++;
-			if (parse_paths(line, config, flags))
+			if (parse_paths(line, cf, flags))
 				return (free(line), 1);
 		}
 		if (!ft_strncmp(line, "C", 1) || !ft_strncmp(line, "F", 1))
 		{
-			if (parse_colors(line, config, flags, arg_map))
+			if (parse_colors(line, cf, flags, arg_map))
 				return (free(line), 1);
 		}
 		free(line);

@@ -6,10 +6,9 @@
 /*   By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 12:11:37 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/15 00:00:20 by saragar2         ###   ########.fr       */
+/*   Updated: 2025/07/15 13:59:42 by saragar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -30,14 +29,14 @@
 # define B	"\033[1m"
 # define NC	"\033[0m"
 
-typedef struct	s_argument			t_argument;
-typedef struct	s_config_flags		t_config_flags;
-typedef struct	s_config			t_config;
-typedef struct  s_data				t_data;
-typedef struct  s_textures			t_textures;
-typedef struct  s_player			t_player;
-typedef struct  s_img				t_img;
-typedef struct  s_ray				t_ray;
+typedef struct s_argument			t_argument;
+typedef struct s_config_flags		t_config_flags;
+typedef struct s_config				t_config;
+typedef struct s_data				t_data;
+typedef struct s_textures			t_textures;
+typedef struct s_player				t_player;
+typedef struct s_img				t_img;
+typedef struct s_ray				t_ray;
 
 # define TILE_SIZE 64
 # define SCREEN_WIDTH 800
@@ -46,10 +45,10 @@ typedef struct  s_ray				t_ray;
 # define NUM_RAYS 100000 // Cantidad de rayos que se lanzarán
 # define RAY_STEP 0.05 // Qué tan preciso es el paso de cada rayo
 # define M_PI 3.14159265358979323846
+# define FOV 0.785398163398
 # define M_SPEED 0.1 
 # define R_SPEED 0.05
 // En radianes
-# define FOV (M_PI / 4.)
 
 struct s_config_flags
 {
@@ -113,10 +112,10 @@ struct s_player
 	double	angle_flag;
 	double	pos_x;
 	double	pos_y;
-	double	dir_x; //vector direccion a la que esta mirando el jugador 
-	double	dir_y; //vector direccion a la que esta mirando el jugador 
-	double	plane_x; //vector perpendicular a la direccion, determina el campo de vision
-	double	plane_y; //vector perpendicular a la direccion, determina el campo de vision
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
 };
 
 struct s_data
@@ -135,18 +134,18 @@ struct s_data
 struct s_ray
 {
 	int		line_height;
-	int     draw_start;
-    int     draw_end;
+	int		draw_start;
+	int		draw_end;
 	double	pos_x;
 	double	pos_y;
 	double	dir_x;
 	double	dir_y;
 	int		map_x;
 	int		map_y;
-	
+
 	//Variables del DDA
-	double  delta_dist_x; // Distancia para recorrer 1 unidad en X a lo largo del rayo
-    double  delta_dist_y; // Distancia para recorrer 1 unidad en Y a lo largo del rayo
+	double	delta_dist_x;
+	double	delta_dist_y;
 	double	side_dist_x;
 	double	side_dist_y;
 	int		step_x;
@@ -154,42 +153,40 @@ struct s_ray
 
 	//Calculos del DDA
 	bool	hit; // 1 si el rayo ha tocado una pared, 0 si no
-	int		side; // 0 si el rayo ha tocado una pared vertical, 1 si ha tocado una pared horizontal
-	double	perp_wall_dist; // Distancia perpendicular desde el jugador al rayo. Para ojo de pez
-	
+	int		side;
+	double	perp_wall_dist; // Distancia perpendicular desde el jugador al rayo.
 	// Texturas
-    double  wall_hit_x;  // Coordenada exacta X en el muro donde el rayo impactó
-    double  wall_hit_y;  // Coordenada exacta Y en el muro donde el rayo impactó
-	double  wall_x_text;
-	double  wall_y_text;
+	double	wall_hit_x; // Coordenada exacta X en el muro donde el rayo impactó
+	double	wall_hit_y; // Coordenada exacta Y en el muro donde el rayo impactó
+	double	wall_x_text;
+	double	wall_y_text;
 };
 
+/*								UTILS										*/
+int		error_msg(const char *error);
+int		go_exit(t_data *data);
 
-/*								UTILS													*/
-int	error_msg(const char *error);
-int go_exit(t_data *data);
-
-/*								PARSE 												*/
-int	general_parse(char **argv, t_argument *map_arguments);
-int top_bottom(t_argument *arg_map);
-int lateral_borders(t_argument *arg_map);
-int	open_file(t_argument *arg_map);
-int	copy_path(char *line, char **text_path, bool *flag);
-int	parse_color(char *line, int *color_dest, bool *flag);
-int	map_population(t_argument *arg_map);
-int	parse_config(t_argument *arg_map, t_config *config, t_config_flags *flags);
-int	check_file(char *file, t_argument *arg_map);
-int	object_player_validation(char *line, t_argument *arg_map);
+/*                              PARSE 										*/
+int		general_parse(char **argv, t_argument *map_arguments);
+int		top_bottom(t_argument *arg_map);
+int		lateral_borders(t_argument *arg_map);
+int		open_file(t_argument *arg_map);
+int		copy_path(char *line, char **text_path, bool *flag);
+int		parse_color(char *line, int *color_dest, bool *flag);
+int		map_population(t_argument *arg_map);
+int		parse_config(t_argument *arg_map, t_config *cf, t_config_flags *flags);
+int		check_file(char *file, t_argument *arg_map);
+int		object_player_validation(char *line, t_argument *arg_map);
 
 /* 							GRAPHICS									*/
-int	set_graphics(t_data *data, t_argument *arg);
-int	calculate_coordanates(t_data *data);
-int	upload_textures(t_data *data, t_textures *textures, t_config *cfig);
-int	init_window(t_data *data);
+int		set_graphics(t_data *data, t_argument *arg);
+int		calculate_coordanates(t_data *data);
+int		upload_textures(t_data *data, t_textures *textures, t_config *cfig);
+int		init_window(t_data *data);
 
 /*				PLAYER										*/
-int	set_position(t_data *data);
-int	set_orientation(t_data *data);
+int		set_position(t_data *data);
+int		set_orientation(t_data *data);
 
 /*				RAYCASTER										*/
 void	rotate_camera(t_data *data, int keycode);
@@ -213,9 +210,9 @@ void	draw_texture_column(t_data *data, t_ray *ray, int x, t_img *texture);
 void	calc_texture_wall(t_ray *ray, int current_width);
 
 /* 								MEMORY ALLOC & SETTING                 */
-int	alloc_set(t_config **config, t_config_flags **flags, t_argument *arg);
-int load_arg(t_argument *arg_map, char **argv);
-int	map_memory(t_argument *arg_map);
+int		alloc_set(t_config **config, t_config_flags **flags, t_argument *arg);
+int		load_arg(t_argument *arg_map, char **argv);
+int		map_memory(t_argument *arg_map);
 
 /* 								CLEANING						 */
 void	free_all(t_argument *arg_map, t_config *config);
@@ -225,7 +222,7 @@ void	free_flags(t_config_flags *flags);
 void	free_data(t_data *data);
 
 /*							TEST						*/
-void print_all(t_argument *arg_map, t_config *config);
+void	print_all(t_argument *arg_map, t_config *config);
 int		draw_loop(t_data *data);
 
 #endif

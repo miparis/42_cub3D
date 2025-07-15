@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 17:12:43 by miparis           #+#    #+#             */
-/*   Updated: 2025/06/12 10:58:45 by miparis          ###   ########.fr       */
+/*   Updated: 2025/07/15 13:20:07 by saragar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ char	*ft_itoa(int nbr);
 int		ft_isspace(int c);
 char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_strdup(char *s);
-
 
 /*                     GNL					                                  */
 /*                     Principal Functions                                  */
