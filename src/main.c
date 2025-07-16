@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 12:16:16 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/15 00:06:09 by saragar2         ###   ########.fr       */
+/*   Updated: 2025/07/16 09:50:27 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int argc, char **argv)
 	mlx_put_image_to_window(data.mlx_ptr, data.w_ptr, data.img_ptr, 0, 0);
 	mlx_hook(data.w_ptr, 2, 1L << 0, key_control, &data);
 	mlx_hook(data.w_ptr, 17, 0, go_exit, &data);
-	mlx_loop_hook(data.mlx_ptr, &draw_loop, &data);
+	mlx_loop_hook(data.mlx_ptr, &game_loop, &data);
 	mlx_loop(data.mlx_ptr);
 	return (0);
 }

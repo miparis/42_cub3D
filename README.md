@@ -5,7 +5,7 @@ Este proyecto implementa un motor de juego básico en 3D utilizando la librería
 
 ---
 
-## 🗂 1. Parsing del Archivo de Configuración y Mapa (Parse) - DONE
+## 🗂 1. Parsing del Archivo de Configuración y Mapa (Parse)
 
 Esta fase se encarga de leer, validar y estructurar toda la información necesaria del archivo `.cub` proporcionado.
 
@@ -26,7 +26,7 @@ Esta fase se encarga de leer, validar y estructurar toda la información necesar
 
 ---
 
-## 🎨 2. Texturas y Recursos Gráficos (Graphics) - DONE
+## 🎨 2. Texturas y Recursos Gráficos (Graphics)
 
 Gestión de la carga y asociación de todos los elementos visuales del juego.
 
@@ -58,7 +58,7 @@ Implementación del algoritmo de raycasting para proyectar la vista 3D del jugad
 
 ---
 
-## 🎮 4. Eventos de Movimiento y Teclado - DONE
+## 🎮 4. Eventos de Movimiento y Teclado
 
 Manejo de la interacción del jugador con el entorno.
 
@@ -80,8 +80,8 @@ Manejo de la interacción del jugador con el entorno.
 Configuración inicial de MiniLibX y el bucle principal de renderizado.
 
 * **5.1. Configuración de MiniLibX:**
-    * Inicializar la librería MiniLibX (`mlx_init()`). - DONE
-    * Crear la ventana de visualización del juego (`mlx_new_window()`). - DONE
+    * Inicializar la librería MiniLibX (`mlx_init()`).
+    * Crear la ventana de visualización del juego (`mlx_new_window()`).
 
 * **5.2. Bucle principal y renderizado:**
     * Configurar el bucle principal de eventos de MiniLibX (`mlx_loop()`).

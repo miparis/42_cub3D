@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   DDA.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 13:04:26 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/14 23:52:45 by saragar2         ###   ########.fr       */
+/*   Updated: 2025/07/16 09:54:17 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,33 +86,4 @@ void	dda_loop(t_data *data, t_ray *ray)
 		ray->perp_wall_dist = (ray->side_dist_y - ray->delta_dist_y);
 	ray->wall_hit_x = ray->pos_x + ray->dir_x * ray->perp_wall_dist;
 	ray->wall_hit_y = ray->pos_y + ray->dir_y * ray->perp_wall_dist;
-}
-
-void	put_floor_ceiling(t_data *game)
-{
-	int	y;
-	int	x;
-
-	y = 0;
-	while (y < SCREEN_HEIGHT / 2)
-	{
-		x = 0;
-		while (x < SCREEN_WIDTH)
-		{
-			put_pixel(game, x, y, game->config->ceiling_color);
-			x++;
-		}
-		y++;
-	}
-	y = SCREEN_HEIGHT / 2;
-	while (y < SCREEN_HEIGHT)
-	{
-		x = 0;
-		while (x < SCREEN_WIDTH)
-		{
-			put_pixel(game, x, y, game->config->floor_color);
-			x++;
-		}
-		y++;
-	}
 }

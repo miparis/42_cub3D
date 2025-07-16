@@ -3,14 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   position.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 20:19:11 by saragar2          #+#    #+#             */
-/*   Updated: 2025/07/14 23:58:35 by saragar2         ###   ########.fr       */
+/*   Updated: 2025/07/16 09:57:26 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+int	key_control(int keycode, t_data *data)
+{
+	if (keycode == 65307)
+		go_exit(data);
+	else if (keycode == 119)
+		update_position(data, cos(data->player->angle) * M_SPEED,
+			sin(data->player->angle) * M_SPEED);
+	else if (keycode == 115)
+		update_position(data, cos(data->player->angle) * -M_SPEED,
+			sin(data->player->angle) * -M_SPEED);
+	else if (keycode == 100)
+		update_position(data, sin(data->player->angle) * -M_SPEED,
+			cos(data->player->angle) * M_SPEED);
+	else if (keycode == 97)
+		update_position(data, sin(data->player->angle) * M_SPEED,
+			cos(data->player->angle) * -M_SPEED);
+	if (keycode == 65361)
+		rotate_camera(data, 65361);
+	if (keycode == 65363)
+		rotate_camera(data, 65363);
+	mlx_put_image_to_window(data->mlx_ptr, data->w_ptr, data->img_ptr, 0, 0);
+	return (0);
+}
 
 int	update_position(t_data *data, double x, double y)
 {

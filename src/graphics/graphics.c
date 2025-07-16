@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 14:49:38 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/14 19:25:06 by saragar2         ###   ########.fr       */
+/*   Updated: 2025/07/16 09:52:22 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,5 @@ int	set_graphics(t_data *data, t_argument *arg)
 		return (error_msg("\nError: Failed to allocate data struct\n"), 1);
 	if (set_data(data, arg, arg->config))
 		return (free_data(data), 1);
-	set_minimap(data);
 	return (0);
 }

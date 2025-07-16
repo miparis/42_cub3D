@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 12:11:37 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/15 13:59:42 by saragar2         ###   ########.fr       */
+/*   Updated: 2025/07/16 10:04:01 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,12 @@ typedef struct s_ray				t_ray;
 # define SCREEN_WIDTH 800
 # define SCREEN_HEIGHT 600
 
-# define NUM_RAYS 100000 // Cantidad de rayos que se lanzarán
-# define RAY_STEP 0.05 // Qué tan preciso es el paso de cada rayo
+# define NUM_RAYS 100000
+# define RAY_STEP 0.05
 # define M_PI 3.14159265358979323846
 # define FOV 0.785398163398
 # define M_SPEED 0.1 
 # define R_SPEED 0.05
-// En radianes
 
 struct s_config_flags
 {
@@ -87,15 +86,15 @@ struct s_argument
 
 struct s_img
 {
-	int		bpp; //bits per pixel
-	int		line_len; //bytes ocupados por cada linea de pixeles en la img
-	int		endian; //endianness de la imagen
+	int		bpp;
+	int		line_len;
+	int		endian;
 	int		width;
 	int		height;
 	int		scale_y;
 	int		scale_x;
 	void	*img_ptr;
-	char	*addr; //puntero al inicio del bufer de la imagen
+	char	*addr;
 };
 
 struct s_textures
@@ -108,7 +107,7 @@ struct s_textures
 
 struct s_player
 {
-	double	angle; // Angulo de vision del jugador, en radianes
+	double	angle;
 	double	angle_flag;
 	double	pos_x;
 	double	pos_y;
@@ -123,7 +122,7 @@ struct s_data
 	void		*mlx_ptr;
 	void		*w_ptr;
 	void		*img_ptr;
-	void		*img_data; //puntero al inicio del bufer de la imagen
+	void		*img_data;
 	t_player	*player;
 	t_textures	*textures;
 	t_argument	*map;
@@ -133,6 +132,7 @@ struct s_data
 
 struct s_ray
 {
+	// Variables used in raycasting init
 	int		line_height;
 	int		draw_start;
 	int		draw_end;
@@ -143,7 +143,7 @@ struct s_ray
 	int		map_x;
 	int		map_y;
 
-	//Variables del DDA
+	// Variables used in DDA calc
 	double	delta_dist_x;
 	double	delta_dist_y;
 	double	side_dist_x;
@@ -151,22 +151,23 @@ struct s_ray
 	int		step_x;
 	int		step_y;
 
-	//Calculos del DDA
-	bool	hit; // 1 si el rayo ha tocado una pared, 0 si no
+	//DDA results
+	bool	hit;
 	int		side;
-	double	perp_wall_dist; // Distancia perpendicular desde el jugador al rayo.
-	// Texturas
-	double	wall_hit_x; // Coordenada exacta X en el muro donde el rayo impactó
-	double	wall_hit_y; // Coordenada exacta Y en el muro donde el rayo impactó
+	double	perp_wall_dist;
+
+	//Coordenate textuures
+	double	wall_hit_x;
+	double	wall_hit_y;
 	double	wall_x_text;
 	double	wall_y_text;
 };
 
-/*								UTILS										*/
+/*************** 		UTILS				*********************************/
 int		error_msg(const char *error);
 int		go_exit(t_data *data);
 
-/*                              PARSE 										*/
+/*************** 		PARSING 			*********************************/
 int		general_parse(char **argv, t_argument *map_arguments);
 int		top_bottom(t_argument *arg_map);
 int		lateral_borders(t_argument *arg_map);
@@ -178,7 +179,7 @@ int		parse_config(t_argument *arg_map, t_config *cf, t_config_flags *flags);
 int		check_file(char *file, t_argument *arg_map);
 int		object_player_validation(char *line, t_argument *arg_map);
 
-/* 							GRAPHICS									*/
+/* 							GRAPHICS						*/
 int		set_graphics(t_data *data, t_argument *arg);
 int		calculate_coordanates(t_data *data);
 int		upload_textures(t_data *data, t_textures *textures, t_config *cfig);
@@ -188,41 +189,45 @@ int		init_window(t_data *data);
 int		set_position(t_data *data);
 int		set_orientation(t_data *data);
 
-/*				RAYCASTER										*/
+/*************** 		RAYCASTER 			********************************/
+
+/*				MOVEMENT									*/
 void	rotate_camera(t_data *data, int keycode);
 int		update_position(t_data *data, double x, double y);
+int		touch(t_data *data, int px, int py);
+int		key_control(int keycode, t_data *data);
+
+/*				DDA											*/
 void	dda_init(t_data *data, int screen_x, t_ray *ray);
 void	dda_calc(t_ray *ray);
 void	dda_loop(t_data *data, t_ray *ray);
+
+/*				DRAW										*/
 void	put_floor_ceiling(t_data *game);
 void	put_pixel(t_data *data, int x, int y, int color);
-int		set_minimap(t_data *data);
-int		touch(t_data *data, int px, int py);
 void	draw_line(t_data *game, int start_x);
 void	draw_limits(t_ray *ray);
 void	draw_ray(t_data *game, t_ray *ray, float start_x);
-int		key_control(int keycode, t_data *data);
-float	distance(float x, float y);
-float	fixed_dist(float x1, float y1, float x2, float y2, t_data *game);
-void	clear_image(t_data *game);
-int		draw_loop(t_data *game);
 void	draw_texture_column(t_data *data, t_ray *ray, int x, t_img *texture);
 void	calc_texture_wall(t_ray *ray, int current_width);
 
-/* 								MEMORY ALLOC & SETTING                 */
+/*				GAME										*/
+void	clear_image(t_data *game);
+int		game_loop(t_data *game);
+
+/* 					MEMORY ALLOC & SETTING                 */
 int		alloc_set(t_config **config, t_config_flags **flags, t_argument *arg);
 int		load_arg(t_argument *arg_map, char **argv);
 int		map_memory(t_argument *arg_map);
 
-/* 								CLEANING						 */
+/* 								CLEANING					*/
 void	free_all(t_argument *arg_map, t_config *config);
 void	free_args(t_argument *arg_map);
 void	free_config(t_config *config);
 void	free_flags(t_config_flags *flags);
 void	free_data(t_data *data);
 
-/*							TEST						*/
+/*************** 		TEST 						*********************/
 void	print_all(t_argument *arg_map, t_config *config);
-int		draw_loop(t_data *data);
 
 #endif
