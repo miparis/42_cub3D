@@ -21,4 +21,4 @@ This project implements a basic 3D game engine using the MiniLibX library, inspi
 ## 📦 Structure
   ![](https://myoctocat.com/assets/images/base-octocat.svg)
 
-👉👉 Check out the full project guide in [cub3D]([https://pages.github.com/](https://app.gitbook.com/o/xcgqfjOLbGMBmRoxBpKN/s/mpwNHCX9uVOBsbGP4A25/)).
+👉👉 Check out the full project guide in [cub3D](https://app.gitbook.com/o/xcgqfjOLbGMBmRoxBpKN/s/mpwNHCX9uVOBsbGP4A25/)
