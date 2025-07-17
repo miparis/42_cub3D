@@ -16,9 +16,9 @@ This project implements a basic 3D game engine using the MiniLibX library, inspi
 
 * **Robust Error Handling:** Comprehensive validation for map and configuration files.
 
-  ![cub3D Demo]([https://github.com/miparis/cub3D/blob/main/cub3d.png])
+  ![cub3D Demo](https://github.com/miparis/cub3D/blob/main/cub3d.png)
 
 ## 📦 Structure
   ![](https://myoctocat.com/assets/images/base-octocat.svg)
 
-👉👉 Check out the full project guide in [cub3D](https://pages.github.com/).
+👉👉 Check out the full project guide in [cub3D]([https://pages.github.com/](https://app.gitbook.com/o/xcgqfjOLbGMBmRoxBpKN/s/mpwNHCX9uVOBsbGP4A25/)).
