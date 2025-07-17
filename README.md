@@ -1,5 +1,5 @@
 
-# 🚀 Cub3D: Un Motor de Juego 3D al Estilo Wolfenstein 3D
+# 🚀 Cub3D: A 3D game to the Wolfenstein Style
 
 This project implements a basic 3D game engine using the MiniLibX library, inspired by the classic Wolfenstein 3D. The goal is to render a 3D environment from a 2D map, allowing the player to explore a labyrinth with textures and colors.
 
