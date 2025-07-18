@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 12:11:37 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/18 12:09:59 by miparis          ###   ########.fr       */
+/*   Updated: 2025/07/18 23:53:41 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,6 +180,7 @@ int		map_population(t_argument *arg_map);
 int		parse_config(t_argument *arg_map, t_config *cf, t_config_flags *flags);
 int		check_file(char *file, t_argument *arg_map);
 int		object_player_validation(char *line, t_argument *arg_map);
+int		prepare_map(t_argument *arg_map);
 
 /* 							GRAPHICS						*/
 int		set_graphics(t_data *data, t_argument *arg);

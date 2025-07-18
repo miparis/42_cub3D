@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   general_parse.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 19:04:43 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/18 19:39:10 by saragar2         ###   ########.fr       */
+/*   Updated: 2025/07/18 23:55:15 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@
 static void	process_dimensions_line(char *line, t_argument *arg_map, int *aux_h)
 {
 	size_t	line_len;
-	int 	i;
-	i = 0;
+	int		i;
 
-	while(line[i] == ' ' || (line[i] >= 9 && line[i] <= 13))
+	i = 0;
+	while (line[i] == ' ' || (line[i] >= 9 && line[i] <= 13))
 		i++;
 	if (line[i] == '\0')
 		return ;
@@ -52,7 +52,9 @@ static void	process_dimensions_line(char *line, t_argument *arg_map, int *aux_h)
 
 static int	object_validation(t_argument *arg_map)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	while (arg_map->map[i])
 	{
 		if (object_player_validation(arg_map->map[i], arg_map))
