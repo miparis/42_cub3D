@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   memory_set.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:17:04 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/18 12:34:33 by miparis          ###   ########.fr       */
+/*   Updated: 2025/07/18 17:35:38 by saragar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,15 @@ static int	check_file_map(char *file)
 {
 	int	fd;
 
-	fd = open(file, __O_DIRECTORY | O_RDONLY);
-	if (fd != -1)
+	fd = open(file, O_DIRECTORY);
+	if (fd > -1)
+	{
+		error_msg("\nError: Map file is a directory\n");
+		close (fd);
+		return (1);
+	}
+	fd = open(file, O_RDONLY);
+	if (fd == -1)
 	{
 		error_msg("\nError: Cannot acces map file\n");
 		return (1);

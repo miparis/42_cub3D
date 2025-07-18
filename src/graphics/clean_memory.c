@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean_memory.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:28:47 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/18 11:27:12 by miparis          ###   ########.fr       */
+/*   Updated: 2025/07/18 17:42:47 by saragar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,11 @@ void	free_data(t_data *data)
 		free_config(data->config);
 	if (data->map)
 		free_args(data->map);
+	if (data->img_ptr)
+		mlx_destroy_image(data->mlx_ptr, data->img_ptr);
+	// free (data->img_ptr);
 	if (data->mlx_ptr)
 		mlx_destroy_display(data->mlx_ptr);
+	free(data->img);
 	free(data->mlx_ptr);
-	free (data->img_ptr);
 }

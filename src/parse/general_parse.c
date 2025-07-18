@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   general_parse.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 19:04:43 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/18 12:28:41 by miparis          ###   ########.fr       */
+/*   Updated: 2025/07/18 18:46:20 by saragar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static int	calculate_dimension(t_argument *arg_map)
 		line = get_next_line(arg_map->fd);
 	}
 	aux_height -= arg_map->line_count;
-	arg_map->height = aux_height;
+	arg_map->height = aux_height - 1;
 	if (arg_map->width == 0 || arg_map->height == 0)
 	{
 		error_msg("Error: Empty or invalid map\n");
@@ -113,7 +113,13 @@ int	general_parse(char **argv, t_argument *arg_map)
 		return (free_all(arg_map, config), 1);
 	if ((map_population(arg_map)))
 		return (free_all(arg_map, config), 1);
+	int i = 0;
+	while (arg_map->map[i])
+	{
+		printf("LINE[%d]: %s\n",i, arg_map->map[i]);
+		i++;
+	}
 	if ((top_bottom(arg_map) || lateral_borders(arg_map)))
-		return (free_all(arg_map, config), 1);
+	return (free_all(arg_map, config), 1);
 	return (close(arg_map->fd), 0);
 }

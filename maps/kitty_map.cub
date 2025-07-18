@@ -1,10 +1,15 @@
-NO                        ./textures/kitty2/mi_carpeta.cub
+NO                        ./textures/kitty2/north_kitty.xpm
 EA ./textures/kitty2/east_kitty.xpm
 SO                       ./textures/kitty2/south_kitty.xpm
 WE ./textures/kitty2/west_kitty.xpm
 
 C 204,255,229
 F 255, 178, 102
+
+
+ 
+
+
 
        1111111111111111111111111
        1000000000110000000000001
@@ -26,3 +31,11 @@ F 255, 178, 102
 1100000111010101111101111000111
 11110111 1110101 101111010001
 11111111 1111111 111111111111
+
+
+
+
+
+
+
+

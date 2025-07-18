@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_maps_1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:03:27 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/16 10:59:59 by miparis          ###   ########.fr       */
+/*   Updated: 2025/07/18 18:46:07 by saragar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,10 @@ int	map_population(t_argument *arg_map)
 {
 	char	*line;
 	size_t	i;
+	int		j;
 
 	i = 0;
+	j = 0;
 	if (map_memory(arg_map) || open_file(arg_map))
 		return (1);
 	if (skip_header_lines(arg_map))
@@ -71,7 +73,10 @@ int	map_population(t_argument *arg_map)
 	line = get_next_line(arg_map->fd);
 	while (line && i < arg_map->height)
 	{
-		if (!line[0])
+		j = 0;
+		while (line[j] == ' ' || (line[j] >= 9 && line[j] <= 13))
+			j++;
+		if (!line[j])
 		{
 			free(line);
 			line = get_next_line(arg_map->fd);
