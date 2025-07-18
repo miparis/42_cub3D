@@ -1,4 +1,4 @@
-NO                        ./textures/kitty2/north_kitty.xpm
+NO                        ./textures/kitty2/mi_carpeta.cub
 EA ./textures/kitty2/east_kitty.xpm
 SO                       ./textures/kitty2/south_kitty.xpm
 WE ./textures/kitty2/west_kitty.xpm

@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 19:04:43 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/16 11:00:12 by miparis          ###   ########.fr       */
+/*   Updated: 2025/07/18 12:28:41 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,8 @@ int	general_parse(char **argv, t_argument *arg_map)
 	t_config		*config;
 	t_config_flags	*flags;
 
-	load_arg(arg_map, argv);
+	if (load_arg(arg_map, argv))
+		return (1);
 	if (check_file(argv[1], arg_map))
 		return (free_args(arg_map), 1);
 	alloc_set(&config, &flags, arg_map);

@@ -6,7 +6,7 @@
 /*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 10:22:01 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/16 11:02:11 by miparis          ###   ########.fr       */
+/*   Updated: 2025/07/18 12:34:18 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 
 int	open_file(t_argument *arg_map)
 {
+	int	dir_fd;
+
+	dir_fd = open(arg_map->file, __O_DIRECTORY | O_RDONLY);
+	if (dir_fd != -1)
+	{
+		close(dir_fd);
+		return (error_msg("\nError: Texture path is a directory\n"), 1);
+	}
 	arg_map->fd = open(arg_map->file, O_RDONLY);
 	if (arg_map->fd < 0)
 		return (error_msg("\nInexisting or unaccesible map file\n"), 1);

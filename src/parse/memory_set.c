@@ -3,21 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   memory_set.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:17:04 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/01 19:46:08 by saragar2         ###   ########.fr       */
+/*   Updated: 2025/07/18 12:34:33 by miparis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+static int	check_file_map(char *file)
+{
+	int	fd;
+
+	fd = open(file, __O_DIRECTORY | O_RDONLY);
+	if (fd != -1)
+	{
+		error_msg("\nError: Cannot acces map file\n");
+		return (1);
+	}
+	close(fd);
+	return (0);
+}
+
 int	load_arg(t_argument *arg_map, char **argv)
 {
 	if (argv[1])
 		arg_map->file = argv[1];
-	else
-		arg_map->file = NULL;
+	if (check_file_map(arg_map->file))
+		return (1);
 	arg_map->fd = 0;
 	arg_map->map = NULL;
 	arg_map->map_start = 0;

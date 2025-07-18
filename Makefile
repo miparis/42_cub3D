@@ -6,7 +6,7 @@
 #    By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/30 12:10:09 by miparis           #+#    #+#              #
-#    Updated: 2025/07/16 10:05:07 by miparis          ###   ########.fr        #
+#    Updated: 2025/07/18 12:29:19 by miparis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,8 @@
 NAME		= cub3D
 
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -g3 -O3
-MLXFLAGS	= -lXext -lX11 -lm -lz 
+CFLAGS		= -Wall -Wextra -Werror -fsanitize=address -g3 -O3
+MLXFLAGS	= -lXext -lX11 -lm -lz
 
 INCLUDES	= -Iincludes -Iincludes/libft -Iincludes/minilibx-linux
 LIBFT_DIR	= includes/libft
