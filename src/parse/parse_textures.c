@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_textures.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miparis <miparis@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:35:59 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/18 11:48:19 by miparis          ###   ########.fr       */
+/*   Updated: 2025/07/18 19:17:50 by saragar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,21 @@ static int	parse_paths(char *line, t_config *config, t_config_flags *flags)
 int	parse_config(t_argument *arg_map, t_config *cf, t_config_flags *flags)
 {
 	char	*line;
+	char	*aux_line;
+	int 	i;
 
 	if (open_file(arg_map))
 		return (1);
 	line = get_next_line(arg_map->fd);
 	while (line != NULL)
 	{
-		if (line[0] == '\n')
-			;
-		else if (!ft_strncmp(line, "NO", 2) || !(ft_strncmp(line, "SO", 2))
+		i = 0;
+		while (line[i] == ' ' || (line[i] >= 9 && line[i] <= 13))
+			i++;
+		aux_line = ft_strtrim(line + i, " \t\r\n");
+		free(line);
+		line = aux_line;
+		if (!ft_strncmp(line, "NO", 2) || !(ft_strncmp(line, "SO", 2))
 			|| !ft_strncmp(line, "WE", 2) || !ft_strncmp(line, "EA", 2))
 		{
 			arg_map->line_count++;
@@ -78,7 +84,7 @@ int	parse_config(t_argument *arg_map, t_config *cf, t_config_flags *flags)
 			if (parse_colors(line, cf, flags, arg_map))
 				return (free(line), 1);
 		}
-		free(line);
+		free(aux_line);
 		line = get_next_line(arg_map->fd);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:03:27 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/18 18:46:07 by saragar2         ###   ########.fr       */
+/*   Updated: 2025/07/18 19:18:48 by saragar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,28 @@ static int	skip_header_lines(t_argument *arg_map)
 {
 	char	*line;
 	size_t	i;
+	int		j;
 
 	i = 0;
-	while (i < (size_t)arg_map->line_count + 2)
+	line = get_next_line(arg_map->fd);
+	while (i < (size_t)arg_map->line_count)
 	{
-		line = get_next_line(arg_map->fd);
+		j = 0;
 		if (!line)
 			return (error_msg("Error: Unexpected end of file before map\n"), 1);
+		while (line[j] == ' ' || (line[j] >= 9 && line[j] <= 13))
+		j++;
+		if (!line[j])
+		{
+			free(line);
+			line = get_next_line(arg_map->fd);
+			continue ;
+		}
 		free(line);
+		line = get_next_line(arg_map->fd);
 		i++;
 	}
+	free(line);
 	return (0);
 }
 

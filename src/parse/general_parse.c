@@ -6,31 +6,31 @@
 /*   By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 19:04:43 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/18 18:46:20 by saragar2         ###   ########.fr       */
+/*   Updated: 2025/07/18 19:18:45 by saragar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static int	check_lines(t_argument *arg_map)
-{
-	int		i;
-	char	*line;
+// static int	check_lines(t_argument *arg_map)
+// {
+// 	int		i;
+// 	char	*line;
 
-	i = 0;
-	while (i < (arg_map->line_count + 1))
-	{
-		line = get_next_line(arg_map->fd);
-		if (!line)
-		{
-			error_msg("Error: Unexpected end of file before map\n");
-			return (free(line), 1);
-		}
-		free(line);
-		i++;
-	}
-	return (0);
-}
+// 	i = 0;
+// 	while (i < (arg_map->line_count + 1))
+// 	{
+// 		line = get_next_line(arg_map->fd);
+// 		if (!line)
+// 		{
+// 			error_msg("Error: Unexpected end of file before map\n");
+// 			return (free(line), 1);
+// 		}
+// 		free(line);
+// 		i++;
+// 	}
+// 	return (0);
+// }
 
 static void	process_dimensions_line(char *line, t_argument *arg_map, int *aux_h)
 {
@@ -48,20 +48,27 @@ static void	process_dimensions_line(char *line, t_argument *arg_map, int *aux_h)
 
 static int	object_validation(t_argument *arg_map)
 {
-	char	*line;
+	// char	*line;
 
-	if (open_file(arg_map))
-		return (1);
-	check_lines(arg_map);
-	line = get_next_line(arg_map->fd);
-	while (line != NULL)
+	// if (open_file(arg_map))
+	// 	return (1);
+	// check_lines(arg_map);
+	// line = get_next_line(arg_map->fd);
+	// while (line != NULL)
+	// {
+	// 	if (object_player_validation(line, arg_map))
+	// 		return (free(line), close(arg_map->fd), 1);
+	// 	free(line);
+	// 	line = get_next_line(arg_map->fd);
+	// }
+	int i = 0;
+	while (arg_map->map[i])
 	{
-		if (object_player_validation(line, arg_map))
-			return (free(line), close(arg_map->fd), 1);
-		free(line);
-		line = get_next_line(arg_map->fd);
+		if (object_player_validation(arg_map->map[i], arg_map))
+			return (1);
+		i++;
 	}
-	return (close(arg_map->fd), 0);
+	return (0);
 }
 
 static int	calculate_dimension(t_argument *arg_map)
@@ -107,19 +114,13 @@ int	general_parse(char **argv, t_argument *arg_map)
 		error_msg("\nError: Missing texture path or color config\n");
 		return (free_all(arg_map, config), 1);
 	}
-	if (object_validation(arg_map))
-		return (close(arg_map->fd), free_all(arg_map, config), 1);
 	if (calculate_dimension(arg_map))
 		return (free_all(arg_map, config), 1);
 	if ((map_population(arg_map)))
 		return (free_all(arg_map, config), 1);
-	int i = 0;
-	while (arg_map->map[i])
-	{
-		printf("LINE[%d]: %s\n",i, arg_map->map[i]);
-		i++;
-	}
+	if (object_validation(arg_map))
+		return (close(arg_map->fd), free_all(arg_map, config), 1);
 	if ((top_bottom(arg_map) || lateral_borders(arg_map)))
-	return (free_all(arg_map, config), 1);
+		return (free_all(arg_map, config), 1);
 	return (close(arg_map->fd), 0);
 }
