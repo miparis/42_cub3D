@@ -6,7 +6,7 @@
 /*   By: saragar2 <saragar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 19:04:43 by miparis           #+#    #+#             */
-/*   Updated: 2025/07/18 19:18:45 by saragar2         ###   ########.fr       */
+/*   Updated: 2025/07/18 19:39:10 by saragar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,12 @@
 static void	process_dimensions_line(char *line, t_argument *arg_map, int *aux_h)
 {
 	size_t	line_len;
+	int 	i;
+	i = 0;
 
-	if (line[0] == '\n')
+	while(line[i] == ' ' || (line[i] >= 9 && line[i] <= 13))
+		i++;
+	if (line[i] == '\0')
 		return ;
 	line_len = ft_strlen(line);
 	if (line[line_len - 1] == '\n')
@@ -48,19 +52,6 @@ static void	process_dimensions_line(char *line, t_argument *arg_map, int *aux_h)
 
 static int	object_validation(t_argument *arg_map)
 {
-	// char	*line;
-
-	// if (open_file(arg_map))
-	// 	return (1);
-	// check_lines(arg_map);
-	// line = get_next_line(arg_map->fd);
-	// while (line != NULL)
-	// {
-	// 	if (object_player_validation(line, arg_map))
-	// 		return (free(line), close(arg_map->fd), 1);
-	// 	free(line);
-	// 	line = get_next_line(arg_map->fd);
-	// }
 	int i = 0;
 	while (arg_map->map[i])
 	{
@@ -87,7 +78,7 @@ static int	calculate_dimension(t_argument *arg_map)
 		line = get_next_line(arg_map->fd);
 	}
 	aux_height -= arg_map->line_count;
-	arg_map->height = aux_height - 1;
+	arg_map->height = aux_height;
 	if (arg_map->width == 0 || arg_map->height == 0)
 	{
 		error_msg("Error: Empty or invalid map\n");
