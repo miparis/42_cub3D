@@ -18,4 +18,4 @@ This project implements a basic 3D game engine using the MiniLibX library, inspi
 
   ![cub3D Demo](https://github.com/miparis/cub3D/blob/main/cub3d.png)
 
-👉👉 Check out the full project guide in [cub3D](https://app.gitbook.com/o/xcgqfjOLbGMBmRoxBpKN/s/mpwNHCX9uVOBsbGP4A25/)
+👨‍💻 Developed by @miparis and @saragar2. Check out the full project guide in [cub3D](https://app.gitbook.com/o/xcgqfjOLbGMBmRoxBpKN/s/mpwNHCX9uVOBsbGP4A25/)
